@@ -82,7 +82,7 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
         User nowy = new User(Cr);
         Register reg = new Register(Cr);
         reg.saveNewUser(Cr);
-         System.out.print("aas"+passString);
+         System.out.print("aas"+pass);
       
 
     }
