@@ -77,17 +77,18 @@ public class Panel_Logowania extends JFrame implements ActionListener {
          
          
        if(LiH.equals(LP)){
-           System.out.print("zalogowany");
+         JOptionPane.showMessageDialog(null, "Witaj "+Login.getText());
        }
        else{
-            System.out.print("NIEzalogowany   "+LiH+"   "+LP);
+            JOptionPane.showMessageDialog(null, "Blad Logowania");
             
            
        }
             }
            else if (src == Rejestracja){
                this.setVisible(false);
-                new Panel_Rejestracji().setVisible(true);               
+               
+                Panel_Rejestracji panel=new Panel_Rejestracji();
                 
             }
          

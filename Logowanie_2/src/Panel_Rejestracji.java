@@ -17,10 +17,7 @@ import javax.swing.JButton;
  */
 public class Panel_Rejestracji extends JFrame implements ActionListener {
 
-    public static void main(String[] args) {
-        new Panel_Rejestracji();
-            
-    }
+    
     private JLabel Login ;
     private JLabel Haslo ;
     private JTextArea Login_1;
@@ -50,7 +47,7 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
 
 
     OK.addActionListener (this);
-    JFrame Panel = new JFrame("Panel Logowania");
+    JFrame Panel = new JFrame("Panel Rejestracji");
     Panel.setLayout (  null);
     Panel.setBounds ( 400, 400, 400, 400);
     Login.setLayout ( null);
@@ -86,6 +83,7 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
         User nowy = new User(Cr);
         Register reg = new Register(Cr);
         reg.saveNewUser(Cr);
+        JOptionPane.showMessageDialog(null, "Rejestracja przebiegla pomyslnie");
 
     }
 
