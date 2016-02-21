@@ -15,9 +15,7 @@ import java.awt.event.ActionListener;
  */
 public class Panel_Logowania extends JFrame implements ActionListener {
 
-    public static void main(String[] args) {
-        new Panel_Logowania();
-    }
+   
     private JLabel Login;
     private JLabel Haslo;
     private JTextArea Login_1 ;
