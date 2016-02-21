@@ -1,0 +1,4 @@
+1. Przy przechodzeniu Panel_Logowania <-> Panel_Rejestracji poprzednie okno powinno być niszczone
+2. Brak możliwości reestracji kilku różnych użytkownikow - to skomplikuje zapis/odczyt z pliku - tutaj bedzie troche wiecej pracy
+3. Nie używaj literałów/numerów magicznych. Trzymaj takie rzeczy jakio stałe pola w klasach
+4. Po udanym loginie otwórz jakieś główne okno
