@@ -24,7 +24,7 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
     private JPasswordField Haslo_1;
     private JButton OK ;
     private char[] pass ;
-
+    private JFrame Panel;
    
 
    
@@ -47,7 +47,7 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
 
 
     OK.addActionListener (this);
-    JFrame Panel = new JFrame("Panel Rejestracji");
+     Panel = new JFrame("Panel Rejestracji");
     Panel.setLayout (  null);
     Panel.setBounds ( 400, 400, 400, 400);
     Login.setLayout ( null);
@@ -72,6 +72,7 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
 
 
     }
+   
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -84,7 +85,12 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
         Register reg = new Register(Cr);
         reg.saveNewUser(Cr);
         JOptionPane.showMessageDialog(null, "Rejestracja przebiegla pomyslnie");
+        Panel.dispose();
+        
+            
+            
 
     }
+    
 
 }

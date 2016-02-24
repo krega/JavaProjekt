@@ -8,6 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,16 +21,14 @@ import java.awt.event.ActionListener;
  */
 public class Panel_Logowania extends JFrame implements ActionListener {
 
-   
     private JLabel Login;
     private JLabel Haslo;
-    private JTextArea Login_1 ;
+    private JTextArea Login_1;
     private JPasswordField Haslo_1;
-    private JButton OK ;
-   private  JButton Rejestracja;
+    private JButton OK;
+    private JButton Rejestracja;
 
     public Panel_Logowania() {
-        
 
         JFrame Panel = new JFrame("Panel Logowania");
         Panel.setLayout(null);
@@ -50,53 +54,69 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         OK = new JButton("OK");
         OK.setLayout(null);
         OK.setBounds(280, 200, 60, 40);
-        OK.addActionListener (this);
+        OK.addActionListener(this);
         Panel.add(OK);
 
         Rejestracja = new JButton("Rejestracja");
         Rejestracja.setLayout(null);
         Rejestracja.setBounds(20, 200, 120, 40);
         Panel.add(Rejestracja);
-        Rejestracja.addActionListener (this);
+        Rejestracja.addActionListener(this);
 
         Panel.setSize(new Dimension(400, 300));
         Panel.setLocation(50, 300);
         Panel.setVisible(true);
     }
-     @Override
-     public void actionPerformed(ActionEvent e) {
-           Object src = e.getSource();
-            if (src == OK) {
 
-        char[] pass = Haslo_1.getPassword();
-        String passString = new String(pass);
-         OdczytZPliku odczyt=new OdczytZPliku();
-         String LiH=new String(odczyt.Odczyt());
-         LiH=LiH.trim();
-         String LP=new String(Login_1.getText()+passString);
-         
-         
-       if(LiH.equals(LP)){
-         JOptionPane.showMessageDialog(null, "Witaj "+Login.getText());
-       }
-       else{
-            JOptionPane.showMessageDialog(null, "Blad Logowania");
-            
-           
-       }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        Object src = e.getSource();
+        Boolean sprawdz = false;
+
+        if (src == OK) {
+
+            try {
+                HashMap nowa = new HashMap();
+
+                char[] pass = Haslo_1.getPassword();
+                String passString = new String(pass);
+
+                Register reg = new Register("C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt");
+
+                reg.Odczyt();
+                Iterator<Map.Entry<String, String>> entries = reg.Odczyt().entrySet().iterator();
+                while (entries.hasNext()) {
+                    Map.Entry<String, String> entry = entries.next();
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+                    System.out.println(Login_1.getText() + "" + passString);
+                    System.out.println(key + "  " + value);
+
+                    if (key.equals(Login_1.getText())&& value.equals(passString)) {
+                      
+                            sprawdz = true;
+                        }
+                    
+
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
             }
-           else if (src == Rejestracja){
-               this.setVisible(false);
-               
-                Panel_Rejestracji panel=new Panel_Rejestracji();
-                
+
+            if (sprawdz == true) {
+
+                JOptionPane.showMessageDialog(null, "Witaj " + Login.getText());
+            } else {
+                JOptionPane.showMessageDialog(null, "Blad Logowania");
+
             }
-         
-     }
+        } else if (src == Rejestracja) {
+            this.setVisible(false);
+
+            Panel_Rejestracji panel = new Panel_Rejestracji();
+
+        }
+    }
+
 }
-     
-    
-    
-    
-
-

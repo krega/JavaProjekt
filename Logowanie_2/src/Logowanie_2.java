@@ -15,6 +15,7 @@ public class Logowanie_2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+     
         Panel_Logowania Panel=new Panel_Logowania();   
         // TODO code application logic here
     }

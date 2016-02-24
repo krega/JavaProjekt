@@ -6,13 +6,14 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -21,58 +22,60 @@ import java.util.Scanner;
 public class Register implements INewUser, ILogin {
 
     Credentials Cr;
-
-    FileOutputStream fos = null;
+    private String sciezka;
+    HashMap<String, String> passmap = new HashMap<String, String>();
 
     public Register(Credentials cr) {
         Cr = cr;
+
+        sciezka = "C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt";
+
+    }
+
+    public Register(String plik_sciezka) {
+        sciezka = plik_sciezka;
+    }
+
+    FileOutputStream fos = null;
+
+    @Override
+    public HashMap Odczyt() throws FileNotFoundException {
+
+        File file = new File(sciezka);
+        Scanner odczyt = new Scanner(file);
+        StringTokenizer token;
+        String v, k;
+
+        while (odczyt.hasNextLine()) {
+            token = new StringTokenizer(odczyt.nextLine(), "|");
+            v = token.nextToken();
+            k = token.nextToken();
+
+            passmap.put(v, k);
+        }
+       return passmap;
     }
 
     @Override
     public Boolean saveNewUser(Credentials Cr) {
         try {
-            fos = new FileOutputStream("plik.txt"); //Otwieranie pliku 
-
+            FileWriter napisz = new FileWriter(sciezka, true);
+            BufferedWriter bw = new BufferedWriter(napisz);
             for (int x = 0; x < Cr.getHaslo().length(); x++) {
-                fos.write(Cr.getHaslo().charAt(x));
+                bw.write(Cr.getHaslo().charAt(x));
             }
-            for (int i = 0; i < Cr.getLogin().length(); i++) {
-                fos.write(Cr.getLogin().charAt(i));
-
+            bw.write("|");
+            for (int y = 0; y < Cr.getLogin().length(); y++) {
+                bw.write(Cr.getLogin().charAt(y));
             }
-
-        } catch (IOException ex) {
-            System.out.println("Błąd operacji na pliku: " + ex);
-        }
-
-        try {
-            fos.close(); //Zamykanie pliku 
+            bw.newLine();
+            bw.close();
+            napisz.close();
             return true;
         } catch (IOException e) {
-            System.out.println("Błąd operacji na pliku: " + e);
+            JOptionPane.showMessageDialog(null, "Rejestracja przebiegla nieprawidlowo");
             return false;
         }
 
     }
-
-    @Override
-    public String Odczyt() {
-        File file = new File("Plik.txt");
-
-        String odczyt = "";
-        try {
-
-            Scanner skaner = new Scanner(file);
-
-            while (skaner.hasNextLine()) {
-
-                odczyt = odczyt + skaner.nextLine() + "\n";
-            }
-              
-        } catch (FileNotFoundException e) {
-            System.out.println("Brak Pliku do odczytania!");
-        }
-            return odczyt;
-    }
-
 }
