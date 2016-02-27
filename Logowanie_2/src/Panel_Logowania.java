@@ -27,45 +27,62 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     private JPasswordField Haslo_1;
     private JButton OK;
     private JButton Rejestracja;
+    private HashMap mapa;
+    Register reg;
 
     public Panel_Logowania() {
+        reg=new Register("C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt");
+        try {
+            mapa=reg.Odczyt();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        JFrame Panel = new JFrame("Panel Logowania");
-        Panel.setLayout(null);
-        Panel.setBounds(400, 400, 400, 400);
+        initPanelFrame();
         Login = new JLabel("Login");
         Login.setLayout(null);
         Login.setBounds(100, 50, 400, 100);
-        Panel.add(Login);
+        panelFrame.add(Login);
         Haslo = new JLabel("Haslo");
         Haslo.setLayout(null);
         Haslo.setBounds(100, 100, 400, 100);
-        Panel.add(Haslo);
+        panelFrame.add(Haslo);
 
-        Login_1 = new JTextArea("Login");
-        Login_1.setLayout(null);
-        Login_1.setBounds(200, 92, 100, 17);
-        Panel.add(Login_1);
+        InitLoginTextArea(panelFrame);
         Haslo_1 = new JPasswordField();
         Haslo_1.setLayout(null);
         Haslo_1.setBounds(200, 140, 100, 17);
-        Panel.add(Haslo_1);
+        panelFrame.add(Haslo_1);
 
         OK = new JButton("OK");
         OK.setLayout(null);
         OK.setBounds(280, 200, 60, 40);
         OK.addActionListener(this);
-        Panel.add(OK);
+        panelFrame.add(OK);
 
         Rejestracja = new JButton("Rejestracja");
         Rejestracja.setLayout(null);
         Rejestracja.setBounds(20, 200, 120, 40);
-        Panel.add(Rejestracja);
+        panelFrame.add(Rejestracja);
         Rejestracja.addActionListener(this);
 
-        Panel.setSize(new Dimension(400, 300));
-        Panel.setLocation(50, 300);
-        Panel.setVisible(true);
+        panelFrame.setSize(new Dimension(400, 300));
+        panelFrame.setLocation(50, 300);
+        panelFrame.setVisible(true);
+    }
+
+    private void initPanelFrame() throws HeadlessException {
+        panelFrame = new JFrame("Panel Logowania");
+        panelFrame.setLayout(null);
+        panelFrame.setBounds(400, 400, 400, 400);
+    }
+    private JFrame panelFrame;
+
+    private void InitLoginTextArea(JFrame Panel) {
+        Login_1 = new JTextArea("Login");
+        Login_1.setLayout(null);
+        Login_1.setBounds(200, 92, 100, 17);
+        Panel.add(Login_1);
     }
 
     @Override
@@ -78,14 +95,14 @@ public class Panel_Logowania extends JFrame implements ActionListener {
 
             try {
                 HashMap nowa = new HashMap();
+                String passString = new String(Haslo_1.getPassword());
 
-                char[] pass = Haslo_1.getPassword();
-                String passString = new String(pass);
-
+//                ICredentialHandler credHnd = new fileCredentialHandler(filename);
+//                ICredentialHandler credHnd = new dbCredentialHandler(url);
                 Register reg = new Register("C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt");
 
-                reg.Odczyt();
-                Iterator<Map.Entry<String, String>> entries = reg.Odczyt().entrySet().iterator();
+              mapa=  reg.Odczyt();
+                Iterator<Map.Entry<String, String>> entries = mapa.entrySet().iterator();
                 while (entries.hasNext()) {
                     Map.Entry<String, String> entry = entries.next();
                     String key = entry.getKey();
@@ -106,7 +123,7 @@ public class Panel_Logowania extends JFrame implements ActionListener {
 
             if (sprawdz == true) {
 
-                JOptionPane.showMessageDialog(null, "Witaj " + Login.getText());
+                JOptionPane.showMessageDialog(null, "Witaj " + Login_1.getText());
             } else {
                 JOptionPane.showMessageDialog(null, "Blad Logowania");
 
@@ -114,7 +131,7 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         } else if (src == Rejestracja) {
             this.setVisible(false);
 
-            Panel_Rejestracji panel = new Panel_Rejestracji();
+            Panel_Rejestracji panel = new Panel_Rejestracji(mapa);
 
         }
     }

@@ -25,9 +25,9 @@ public class Register implements INewUser, ILogin {
     private String sciezka;
     HashMap<String, String> passmap = new HashMap<String, String>();
 
-    public Register(Credentials cr) {
+    public Register(Credentials cr, HashMap pass) {
         Cr = cr;
-
+        passmap = pass;
         sciezka = "C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt";
 
     }
@@ -53,25 +53,40 @@ public class Register implements INewUser, ILogin {
 
             passmap.put(v, k);
         }
-       return passmap;
+        return passmap;
     }
 
     @Override
     public Boolean saveNewUser(Credentials Cr) {
+
         try {
             FileWriter napisz = new FileWriter(sciezka, true);
             BufferedWriter bw = new BufferedWriter(napisz);
-            for (int x = 0; x < Cr.getHaslo().length(); x++) {
-                bw.write(Cr.getHaslo().charAt(x));
+            System.out.print(Cr.getLogin());
+            System.out.print(Cr.getHaslo());
+            if (!passmap.containsKey(Cr.getLogin())) {
+
+                for (int y = 0; y < Cr.getLogin().length(); y++) {
+
+                    bw.write(Cr.getLogin().charAt(y));
+                }
+                bw.write("|");
+                for (int x = 0; x < Cr.getHaslo().length(); x++) {
+
+                    bw.write(Cr.getHaslo().charAt(x));
+                }
+                bw.newLine();
+                passmap.put(Cr.getLogin(), Cr.getHaslo());
+                bw.close();
+                napisz.close();
+                return true;
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Podany login jest zajety");
+                return false;
+
             }
-            bw.write("|");
-            for (int y = 0; y < Cr.getLogin().length(); y++) {
-                bw.write(Cr.getLogin().charAt(y));
-            }
-            bw.newLine();
-            bw.close();
-            napisz.close();
-            return true;
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Rejestracja przebiegla nieprawidlowo");
             return false;

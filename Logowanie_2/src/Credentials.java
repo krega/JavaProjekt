@@ -19,7 +19,7 @@ public class Credentials {
     String getLogin(){return Login;}
     void SetLogin(String login){Login=login;}
     
-    public Credentials(String haslo, String login){
+    public Credentials( String login,String haslo){
        
         Login=login;
          Haslo=haslo;
