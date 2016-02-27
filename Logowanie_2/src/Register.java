@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
  *
  * @author Kamil
  */
-public class Register implements INewUser, ILogin {
+public class Register implements ICredentialHandler {
 
     Credentials Cr;
     private String sciezka;
@@ -60,37 +60,33 @@ public class Register implements INewUser, ILogin {
     public Boolean saveNewUser(Credentials Cr) {
 
         try {
-            FileWriter napisz = new FileWriter(sciezka, true);
-            BufferedWriter bw = new BufferedWriter(napisz);
-            System.out.print(Cr.getLogin());
-            System.out.print(Cr.getHaslo());
             if (!passmap.containsKey(Cr.getLogin())) {
-
-                for (int y = 0; y < Cr.getLogin().length(); y++) {
-
-                    bw.write(Cr.getLogin().charAt(y));
-                }
-                bw.write("|");
-                for (int x = 0; x < Cr.getHaslo().length(); x++) {
-
-                    bw.write(Cr.getHaslo().charAt(x));
-                }
-                bw.newLine();
+                zapisDoPliku(Cr);
                 passmap.put(Cr.getLogin(), Cr.getHaslo());
-                bw.close();
-                napisz.close();
                 return true;
             } else {
-
                 JOptionPane.showMessageDialog(null, "Podany login jest zajety");
                 return false;
-
             }
-
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Rejestracja przebiegla nieprawidlowo");
             return false;
         }
+    }
 
+    private void zapisDoPliku(Credentials Cr1) throws IOException {
+        FileWriter napisz = new FileWriter(sciezka, true);
+        BufferedWriter bw = new BufferedWriter(napisz);
+        for (int y = 0; y < Cr1.getLogin().length(); y++) {
+            bw.write(Cr1.getLogin().charAt(y));
+        }
+        bw.write("|");
+        for (int x = 0; x < Cr1.getHaslo().length(); x++) {
+            bw.write(Cr1.getHaslo().charAt(x));
+        }
+        bw.newLine();
+        bw.close();
+        napisz.close();
     }
 }
+
