@@ -7,13 +7,14 @@ import java.util.HashMap;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Kamil
  */
 public interface ICredentialHandler {
-     HashMap Odczyt()throws IOException;
-     Boolean saveNewUser(Credentials  C) throws IOException;
-    
+
+    HashMap Odczyt() throws IOException;
+
+    public void zapisNowegoUzytkownika(Credentials Cr1) throws IOException;
+
 }

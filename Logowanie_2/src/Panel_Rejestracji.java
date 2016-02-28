@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 
 /*
@@ -25,11 +28,12 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
     private JButton OK;
     private char[] pass;
     private JFrame PanelFrame;
-    private HashMap mapa;
+    private HashMap mapaLoginow;
+    private Panel_Logowania panelLogowania;
 
-    public Panel_Rejestracji(HashMap passmap) {
-
-        mapa = passmap;
+    public Panel_Rejestracji(HashMap passmap, Panel_Logowania Panel) {
+        panelLogowania = Panel;
+        mapaLoginow = passmap;
         initPanelFrame();
         initLabelLogin();
         initLabelHaslo();
@@ -53,6 +57,19 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
         PanelFrame.setBounds(400, 400, 400, 400);
         PanelFrame.setSize(new Dimension(400, 300));
         PanelFrame.setLocation(50, 300);
+    }
+
+    private Boolean saveNewUser(Credentials Cr) {
+
+        if (!mapaLoginow.containsKey(Cr.getLogin())) {
+
+            mapaLoginow.put(Cr.getLogin(), Cr.getHaslo());
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Podany login jest zajety");
+            return false;
+        }
+
     }
 
     private void initButtonOk() {
@@ -86,15 +103,18 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        pass = Haslo_1.getPassword();
-        String passString = new String(pass);
+        String passString = new String(Haslo_1.getPassword());
         Credentials Cr = new Credentials(Login_1.getText(), passString);
         User nowy = new User(Cr);
-        Register reg = new Register(Cr, mapa);
-        if (reg.saveNewUser(Cr) == true) {
 
-            JOptionPane.showMessageDialog(null, "Rejestracja przebiegla pomyslnie");
-            PanelFrame.dispose();
+        try {
+            if (saveNewUser(Cr) == true) {
+                panelLogowania.NewUser(Cr);
+                JOptionPane.showMessageDialog(null, "Rejestracja przebiegla pomyslnie");
+                PanelFrame.dispose();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Panel_Rejestracji.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

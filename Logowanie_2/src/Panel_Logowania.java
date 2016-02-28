@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,30 +28,31 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     private JButton OK;
     private JButton Rejestracja;
     private HashMap mapa;
-    Register reg;
     private JFrame panelFrame;
-    ICredentialHandler handler;
+    private ICredentialHandler itsCredentialHandler;
+    private Panel_Rejestracji itsPanelRejestracji;
 
     public Panel_Logowania() {
-        initRegister();
+    }
+
+    public Panel_Logowania(ICredentialHandler handl) {
+        itsCredentialHandler = handl;
+        initHashMapa();
         initPanelFrame();
         initLabelLogin();
         initLabelHaslo();
         InitLoginTextArea(panelFrame);
         initPasswordField();
         initButtonOk();
-        initButtonRejestracja();  
+        initButtonRejestracja();
         panelFrame.setVisible(true);
-        
 
-       
     }
 
-    private void initRegister() {
-        reg=new Register("C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt");
+    private void initHashMapa() {
         try {
-            mapa=reg.Odczyt();
-        } catch (FileNotFoundException ex) {
+            mapa = itsCredentialHandler.Odczyt();
+        } catch (IOException ex) {
             Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -98,11 +98,8 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         panelFrame = new JFrame("Panel Logowania");
         panelFrame.setLayout(null);
         panelFrame.setBounds(400, 400, 400, 400);
-         
-        
-        
+
     }
-    
 
     private void InitLoginTextArea(JFrame Panel) {
         LoginTextField = new JTextArea("Login");
@@ -113,56 +110,51 @@ public class Panel_Logowania extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         Object src = e.getSource();
-        Boolean sprawdz = false;
 
         if (src == OK) {
-
-            sprawdzLogin(sprawdz);
+            sprawdzLogin();
         } else if (src == Rejestracja) {
             this.setVisible(false);
-
-            Panel_Rejestracji panel = new Panel_Rejestracji(mapa);
+            itsPanelRejestracji = new Panel_Rejestracji(mapa, this);
 
         }
     }
 
-    private void sprawdzLogin(Boolean sprawdz) throws HeadlessException {
-        try {
-            HashMap nowa = new HashMap();
-            String passString = new String(HasloPasswordField.getPassword());
-            
-//                ICredentialHandler credHnd = new fileCredentialHandler(filename);
-//                ICredentialHandler credHnd = new dbCredentialHandler(url);
-Register reg = new Register("C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt");
+    public void NewUser(Credentials Cr) throws IOException {
 
-mapa=  handler.Odczyt();
-Iterator<Map.Entry<String, String>> entries = mapa.entrySet().iterator();
-while (entries.hasNext()) {
-    Map.Entry<String, String> entry = entries.next();
-    String key = entry.getKey();
-    String value = entry.getValue();
-   
-    if (key.equals(LoginTextField.getText())&& value.equals(passString)) {
-        
-        sprawdz = true;
+        itsCredentialHandler.zapisNowegoUzytkownika(Cr);
+
     }
-    
-    
-}
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
-        
-        } catch (IOException ex) {
-            Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                if (sprawdz == true) {
-            
+
+    private void sprawdzLogin() throws HeadlessException {
+
+        if (porownajPassy() == true) {
+
             JOptionPane.showMessageDialog(null, "Witaj " + LoginTextField.getText());
         } else {
-            JOptionPane.showMessageDialog(null, "Blad Logowania");            
+            JOptionPane.showMessageDialog(null, "Blad Logowania");
         }
+    }
+
+    private Boolean porownajPassy() {
+        Boolean sprawdz = false;
+
+        String passString = new String(HasloPasswordField.getPassword());
+//           ICredentialHandler credHnd = new dbCredentialHandler(url);
+
+        Iterator<Map.Entry<String, String>> entries = mapa.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<String, String> entry = entries.next();
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (key.equals(LoginTextField.getText()) && value.equals(passString)) {
+                sprawdz = true;
+
+            }
+
+        }
+        return sprawdz;
     }
 
 }
