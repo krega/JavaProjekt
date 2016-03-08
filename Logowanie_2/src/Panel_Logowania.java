@@ -31,6 +31,8 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     private JFrame panelFrame;
     private ICredentialHandler itsCredentialHandler;
     private Panel_Rejestracji itsPanelRejestracji;
+    private Glowne_Okno itsGlowneOkno;
+    
 
     public Panel_Logowania() {
     }
@@ -113,7 +115,11 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         Object src = e.getSource();
 
         if (src == OK) {
-            sprawdzLogin();
+            if(sprawdzLogin()==true){
+                Credentials Cr=new Credentials(Login.getText(),new String(HasloPasswordField.getPassword()));
+                itsGlowneOkno=new Glowne_Okno(new User(Cr));
+                panelFrame.dispose();
+            }
         } else if (src == Rejestracja) {
             this.setVisible(false);
             itsPanelRejestracji = new Panel_Rejestracji(mapa, this);
@@ -127,13 +133,16 @@ public class Panel_Logowania extends JFrame implements ActionListener {
 
     }
 
-    private void sprawdzLogin() throws HeadlessException {
+    private boolean sprawdzLogin() throws HeadlessException {
 
         if (porownajPassy() == true) {
-
+            
             JOptionPane.showMessageDialog(null, "Witaj " + LoginTextField.getText());
+            return true;
         } else {
+            
             JOptionPane.showMessageDialog(null, "Blad Logowania");
+            return false;
         }
     }
 

@@ -1,0 +1,2 @@
+Pytanie1;pytanie1odpowiedz1;pytanie1odpowiedz2;pytanie1odpowiedz3;pytanie1odpoiwedz4;Pytanie1kategoria
+Pytanie2;pytanie2odpowiedz1;pytanie2odpowiedz2;pytanie2odpowiedz3;pytanie2odpoiwedz4;Pytanie2kategoria
