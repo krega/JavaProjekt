@@ -1,16 +1,10 @@
 
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,25 +16,46 @@ import java.util.StringTokenizer;
  *
  * @author Kamil
  */
-public class DostanPytanie implements IPobierzPytanie{
+public class DostanPytanieZPliku implements IPobierzPytanie{
 
    private Kategoria kategoria;
-   private LinkedList mapa;
-   public DostanPytanie(){mapa= new LinkedList();}
-   public DostanPytanie(Kategoria kare)
+   private LinkedList listaPytan;
+   private Pytanie pytanie;
+   public DostanPytanieZPliku(){
+       listaPytan= new LinkedList();
+   pytanie=new Pytanie();
+   }
+   public DostanPytanieZPliku(Kategoria kare)
    {
-       mapa=new LinkedList();
+       listaPytan=new LinkedList();
        kategoria=kare;
+       pytanie=new Pytanie();
    }
    
 
   String rozroznijKategorie(Kategoria kate) throws FileNotFoundException
    {
        String kat=kate.toString();
+       String path="C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\Logowanie_2\\Logowanie_2\\Pytania\\";
    
-     return "C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\Pytania\\"+kat+".txt";
+     String sciezka=new String(path+kat+".txt");
+       return sciezka;
+   }
+   public int liczbaPytan(int i)
+   {
+       return i;
    }
    
+  @Override
+   public String[] dzielString(String c)
+    {
+        String []tab =new String[5];
+            tab= c.split(";");
+           
+            return tab;
+    }
+     
+  
    
    @Override
   public LinkedList PobierzPytanie(Kategoria kategoria)throws FileNotFoundException{
@@ -54,14 +69,16 @@ public class DostanPytanie implements IPobierzPytanie{
        System.exit(1);
    }
         BufferedReader bfr = new BufferedReader(fr);
-        // ODCZYT KOLEJNYCH LINII Z PLIKU:
+       
    try {
      while((linia = bfr.readLine()) != null){
-         String linia2=linia;
         
+         
+        Pytanie pytanie=new Pytanie((dzielString(linia)));
    
-        System.out.println(linia);
-             mapa.add(linia);
+  //      System.out.println(linia);
+             listaPytan.add(pytanie);
+         
         
      }
     } catch (IOException e) {
@@ -76,7 +93,11 @@ public class DostanPytanie implements IPobierzPytanie{
         }
 
         
-        return mapa;
+        return listaPytan;
     }
+  
+    
+  
+   
 
 }

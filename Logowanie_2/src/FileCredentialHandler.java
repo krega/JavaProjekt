@@ -27,13 +27,14 @@ public class FileCredentialHandler implements ICredentialHandler {
         Cr = cr;
 
         passmap = pass;
-        sciezka = "C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt";
-
+        //sciezka = "C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt";
+         sciezka="C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\Logowanie_2\\Logowanie_2\\plik.txt";
     }
 
     FileCredentialHandler() {
         passmap = new HashMap<String, String>();
-        sciezka = "C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt";
+       // sciezka = "C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\JavaProjekt\\Logowanie_2\\plik.txt";
+        sciezka="C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\Logowanie_2\\Logowanie_2\\plik.txt";
     }
 
     @Override

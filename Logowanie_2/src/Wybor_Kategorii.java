@@ -31,7 +31,7 @@ public class Wybor_Kategorii implements  ActionListener {
     
     public Wybor_Kategorii()
     {
-       pytania=new DostanPytanie();
+       pytania=new DostanPytanieZPliku();
        initJFramePanelFrame();
        initJButtonSport();
        initJButtonPolityka();
@@ -95,9 +95,11 @@ public class Wybor_Kategorii implements  ActionListener {
          if(src==przyciskHistoria)
          {
             Kategoria kategoria=Kategoria.Historia;
+           
             
              try {
-                 pytania.PobierzPytanie(kategoria);
+                 //pytania.PobierzPytanie(kategoria);
+                  new Okno_Pytania(pytania,kategoria);
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -106,8 +108,8 @@ public class Wybor_Kategorii implements  ActionListener {
          {
              Kategoria kategoria=Kategoria.Polityka;
               try {
-                 pytania.PobierzPytanie(kategoria);
-                 new Okno_Pytania(kategoria);
+              //   pytania.PobierzPytanie(kategoria);
+                 new Okno_Pytania(pytania,kategoria);
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -116,8 +118,9 @@ public class Wybor_Kategorii implements  ActionListener {
          {
              Kategoria kategoria=Kategoria.Sport;
              try {
-                 pytania.PobierzPytanie(kategoria);
-                 new Okno_Pytania(kategoria);
+
+                // pytania.PobierzPytanie(kategoria);
+                 new Okno_Pytania(pytania,kategoria);
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -126,7 +129,9 @@ public class Wybor_Kategorii implements  ActionListener {
          {
              Kategoria kategoria=Kategoria.Literatura;
              try {
-                 pytania.PobierzPytanie(kategoria);
+                // pytania.PobierzPytanie(kategoria);
+                   new Okno_Pytania(pytania,kategoria);
+
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -134,8 +139,10 @@ public class Wybor_Kategorii implements  ActionListener {
          if(src==przyciskSztuka)
          {
              Kategoria kategoria=Kategoria.Sztuka;
+             
               try {
-                 pytania.PobierzPytanie(kategoria);
+                 //pytania.PobierzPytanie(kategoria);
+                   new Okno_Pytania(pytania,kategoria);
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
