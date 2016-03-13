@@ -11,7 +11,8 @@
 public class User {
     
     
-    public Credentials Credential;
+    private Credentials Credential;
+    private int poprawnaOdpowiedz;
     
     public User(Credentials Cr)
     {

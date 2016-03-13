@@ -100,6 +100,7 @@ public class Wybor_Kategorii implements  ActionListener {
              try {
                  //pytania.PobierzPytanie(kategoria);
                   new Okno_Pytania(pytania,kategoria);
+                  framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -108,8 +109,9 @@ public class Wybor_Kategorii implements  ActionListener {
          {
              Kategoria kategoria=Kategoria.Polityka;
               try {
-              //   pytania.PobierzPytanie(kategoria);
+              //   ustawPytanie.PobierzPytanie(kategoria);
                  new Okno_Pytania(pytania,kategoria);
+                  framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -119,8 +121,9 @@ public class Wybor_Kategorii implements  ActionListener {
              Kategoria kategoria=Kategoria.Sport;
              try {
 
-                // pytania.PobierzPytanie(kategoria);
+                // ustawPytanie.PobierzPytanie(kategoria);
                  new Okno_Pytania(pytania,kategoria);
+                  framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -129,8 +132,9 @@ public class Wybor_Kategorii implements  ActionListener {
          {
              Kategoria kategoria=Kategoria.Literatura;
              try {
-                // pytania.PobierzPytanie(kategoria);
+                // ustawPytanie.PobierzPytanie(kategoria);
                    new Okno_Pytania(pytania,kategoria);
+                    framePanel.dispose();
 
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
@@ -143,6 +147,7 @@ public class Wybor_Kategorii implements  ActionListener {
               try {
                  //pytania.PobierzPytanie(kategoria);
                    new Okno_Pytania(pytania,kategoria);
+                    framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }

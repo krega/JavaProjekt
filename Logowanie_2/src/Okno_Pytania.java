@@ -4,11 +4,13 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /*
@@ -16,13 +18,10 @@ import javax.swing.JTextArea;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  *
  * @author Kamil
  */
-
 public class Okno_Pytania implements ActionListener {
 
     private JTextArea pytanieArea;
@@ -32,18 +31,28 @@ public class Okno_Pytania implements ActionListener {
     private Pytanie pytanie;
     private Kategoria kategoria;
     private Losowanie losowanie;
+    private List<JButton> listaPrzyciskow = new ArrayList<JButton>();
 
     public Okno_Pytania(IPobierzPytanie pytanie, Kategoria kat) throws FileNotFoundException {
         kategoria = kat;
         listaPytan = pytanie.PobierzPytanie(kategoria);
         losowanie = new Losowanie(listaPytan.size());
-        pytania();
+        ustawPytanie();
 
         initJFramePanelFrame();
         initJTextAreaPytanie();
         initButtonsOdpowiedzi();
+        initListaPrzyciskow();
+        zmianaPytania();
         panelFrame.setVisible(true);
 
+    }
+
+    private void initListaPrzyciskow() {
+        listaPrzyciskow.add(odpowiedz_1Button);
+        listaPrzyciskow.add(odpowiedz_2Button);
+        listaPrzyciskow.add(odpowiedz_3Button);
+        listaPrzyciskow.add(odpowiedz_4Button);
     }
 
     private void initButtonsOdpowiedzi() {
@@ -63,11 +72,13 @@ public class Okno_Pytania implements ActionListener {
     }
 
     //zmienic nazwe, na jakas znaczaca
-    public Pytanie pytania() {
+    public Pytanie ustawPytanie() {
         int a = losowanie.get();
-        if (a == -1){
-            System.out.println("Zle losowanie");
-            return null;
+        if (a == -1) {
+            JOptionPane.showMessageDialog(null, "Koniec pytan w tej kategorii");
+
+            panelFrame.dispose();
+
         }
         pytanie = (Pytanie) (listaPytan.get(a));
 
@@ -121,34 +132,59 @@ public class Okno_Pytania implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
-        pytania();
+
         if (src == odpowiedz_1Button) {
-            pytanieArea.setText(pytanie.tresc);
-            odpowiedz_1Button.setText(pytanie.odp1);
-            odpowiedz_2Button.setText(pytanie.odp2);
-            odpowiedz_3Button.setText(pytanie.odp3);
-            odpowiedz_4Button.setText(pytanie.odp4);
+            if (odpowiedz_1Button.getText().equals(pytanie.odp1)) {
+
+                JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+            } else {
+                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+            }
+            ustawPytanie();
+            zmianaPytania();
+
         }
         if (src == odpowiedz_2Button) {
-            pytanieArea.setText(pytanie.tresc);
-            odpowiedz_1Button.setText(pytanie.odp1);
-            odpowiedz_2Button.setText(pytanie.odp2);
-            odpowiedz_3Button.setText(pytanie.odp3);
-            odpowiedz_4Button.setText(pytanie.odp4);
+            if (odpowiedz_2Button.getText().equals(pytanie.odp1)) {
+                JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+            } else {
+                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+            }
+            ustawPytanie();
+            zmianaPytania();
+
         }
         if (src == odpowiedz_3Button) {
-            pytanieArea.setText(pytanie.tresc);
-            odpowiedz_1Button.setText(pytanie.odp1);
-            odpowiedz_2Button.setText(pytanie.odp2);
-            odpowiedz_3Button.setText(pytanie.odp3);
-            odpowiedz_4Button.setText(pytanie.odp4);
+            if (odpowiedz_3Button.getText().equals(pytanie.odp1)) {
+                JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+            } else {
+                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+            }
+            ustawPytanie();
+            zmianaPytania();
+
         }
         if (src == odpowiedz_4Button) {
-            pytanieArea.setText(pytanie.tresc);
-            odpowiedz_1Button.setText(pytanie.odp1);
-            odpowiedz_2Button.setText(pytanie.odp2);
-            odpowiedz_3Button.setText(pytanie.odp3);
-            odpowiedz_4Button.setText(pytanie.odp4);
+            if (odpowiedz_4Button.getText().equals(pytanie.odp1)) {
+                JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+            } else {
+                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+            }
+            ustawPytanie();
+            zmianaPytania();
+
         }
+
+    }
+
+    private void zmianaPytania() {
+
+        pytanieArea.setText(pytanie.tresc);
+        Collections.shuffle(listaPrzyciskow);
+        listaPrzyciskow.get(0).setText(pytanie.odp1);
+        listaPrzyciskow.get(1).setText(pytanie.odp2);
+        listaPrzyciskow.get(2).setText(pytanie.odp3);
+        listaPrzyciskow.get(3).setText(pytanie.odp4);
+
     }
 }
