@@ -26,11 +26,13 @@ public class Wybor_Kategorii implements  ActionListener {
     private JButton przyciskLiteratura;
     private JButton przyciskHistoria;
     private Kategoria kategoria;
+    private User user;
     IPobierzPytanie pytania;
     
     
-    public Wybor_Kategorii()
+    public Wybor_Kategorii(User us)
     {
+        user=us;
        pytania=new DostanPytanieZPliku();
        initJFramePanelFrame();
        initJButtonSport();
@@ -99,7 +101,7 @@ public class Wybor_Kategorii implements  ActionListener {
             
              try {
                  //pytania.PobierzPytanie(kategoria);
-                  new Okno_Pytania(pytania,kategoria);
+                  new Okno_Pytania(pytania,kategoria,user);
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +112,7 @@ public class Wybor_Kategorii implements  ActionListener {
              Kategoria kategoria=Kategoria.Polityka;
               try {
               //   ustawPytanie.PobierzPytanie(kategoria);
-                 new Okno_Pytania(pytania,kategoria);
+                 new Okno_Pytania(pytania,kategoria,user);
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,7 +124,7 @@ public class Wybor_Kategorii implements  ActionListener {
              try {
 
                 // ustawPytanie.PobierzPytanie(kategoria);
-                 new Okno_Pytania(pytania,kategoria);
+                 new Okno_Pytania(pytania,kategoria,user);
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,7 +135,7 @@ public class Wybor_Kategorii implements  ActionListener {
              Kategoria kategoria=Kategoria.Literatura;
              try {
                 // ustawPytanie.PobierzPytanie(kategoria);
-                   new Okno_Pytania(pytania,kategoria);
+                   new Okno_Pytania(pytania,kategoria,user);
                     framePanel.dispose();
 
              } catch (FileNotFoundException ex) {
@@ -146,7 +148,7 @@ public class Wybor_Kategorii implements  ActionListener {
              
               try {
                  //pytania.PobierzPytanie(kategoria);
-                   new Okno_Pytania(pytania,kategoria);
+                   new Okno_Pytania(pytania,kategoria,user);
                     framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);

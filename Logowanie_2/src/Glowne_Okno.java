@@ -95,7 +95,7 @@ public class Glowne_Okno extends JFrame implements ActionListener {
              System.exit(0);
           }
         if(src==przyciskRozpocznijGre){
-            wyborKategorii=new Wybor_Kategorii(); 
+            wyborKategorii=new Wybor_Kategorii(user); 
             
         }
         

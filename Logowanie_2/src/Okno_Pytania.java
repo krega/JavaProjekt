@@ -1,6 +1,5 @@
 
 import java.awt.Dimension;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -31,9 +30,11 @@ public class Okno_Pytania implements ActionListener {
     private Pytanie pytanie;
     private Kategoria kategoria;
     private Losowanie losowanie;
+    private User user;
     private List<JButton> listaPrzyciskow = new ArrayList<JButton>();
 
-    public Okno_Pytania(IPobierzPytanie pytanie, Kategoria kat) throws FileNotFoundException {
+    public Okno_Pytania(IPobierzPytanie pytanie, Kategoria kat, User us) throws FileNotFoundException {
+        user=us;
         kategoria = kat;
         listaPytan = pytanie.PobierzPytanie(kategoria);
         losowanie = new Losowanie(listaPytan.size());
@@ -137,8 +138,10 @@ public class Okno_Pytania implements ActionListener {
             if (odpowiedz_1Button.getText().equals(pytanie.odp1)) {
 
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+                user.dodajPoprawnaOdpowiedz(kategoria);
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
             }
             ustawPytanie();
             zmianaPytania();
@@ -147,8 +150,10 @@ public class Okno_Pytania implements ActionListener {
         if (src == odpowiedz_2Button) {
             if (odpowiedz_2Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+                user.dodajPoprawnaOdpowiedz(kategoria);
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
             }
             ustawPytanie();
             zmianaPytania();
@@ -157,8 +162,10 @@ public class Okno_Pytania implements ActionListener {
         if (src == odpowiedz_3Button) {
             if (odpowiedz_3Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+                user.dodajPoprawnaOdpowiedz(kategoria);
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
             }
             ustawPytanie();
             zmianaPytania();
@@ -167,8 +174,10 @@ public class Okno_Pytania implements ActionListener {
         if (src == odpowiedz_4Button) {
             if (odpowiedz_4Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+                user.dodajPoprawnaOdpowiedz(kategoria);
             } else {
-                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+                JOptionPane.showMessageDialog(null, "Niepoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
             }
             ustawPytanie();
             zmianaPytania();
