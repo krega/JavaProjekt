@@ -1,0 +1,16 @@
+1. Przy przechodzeniu Panel_Logowania <-> Panel_Rejestracji poprzednie okno powinno być niszczone
+2. Brak możliwości reestracji kilku różnych użytkownikow - to skomplikuje zapis/odczyt z pliku - tutaj bedzie troche wiecej pracy
+3. Nie używaj literałów/numerów magicznych. Trzymaj takie rzeczy jakio stałe pola w klasach
+4. Po udanym loginie otwórz jakieś główne okno
+5. PanelLogowania nie powinien wiedziec w jaki sposob przechowywane sa loginy (plik / baza danych) - masz uzyc interfejsu ICredntialHandler.
+   panel ma miec pole ICredntialHandler credentialHandler, inicjalizowane w konstruktorze, w tej chwili obiektem klady FileCredentialHandler,
+   a docelowo obiektem klasy DBCredentialHandler;
+
+
+
+CodingStyle:
+1. Grupowac kod w funkcje, tak, zeby zadna funkcja nie byla dluzsza niz 10 linii. Nazwy funkcji maja byc jednoznaczne
+2. Nazwy zmiennych maja miec znaczeniei bez numerow. Np. Login1->loginTextArea
+3. Nazwy zmiennych i metod powinny zaczynac sie z malej litery
+4. Nazwy klas powinny zaczynac sie z duzej litery
+5. Nazwy skladajace sie z kilku slow: kazde slowo (oprocz pierwszego) z duzej litery: np: loginTextArea

@@ -25,8 +25,10 @@ public class Glowne_Okno extends JFrame implements ActionListener {
     private JButton oAutorze;
     private Wybor_Kategorii wyborKategorii;
     private User user;
-    public Glowne_Okno(User us){
+    private ICredentialHandler hndler;
+    public Glowne_Okno(User us, ICredentialHandler hnd){
         user=us;
+        hndler=hnd;
         initframePanel();
         initJButtonRozpocznijGre();
         initJButtonStatystyki();
@@ -95,7 +97,7 @@ public class Glowne_Okno extends JFrame implements ActionListener {
              System.exit(0);
           }
         if(src==przyciskRozpocznijGre){
-            wyborKategorii=new Wybor_Kategorii(); 
+            wyborKategorii=new Wybor_Kategorii(user,hndler); 
             
         }
         

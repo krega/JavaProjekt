@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -26,12 +27,16 @@ public class Wybor_Kategorii implements  ActionListener {
     private JButton przyciskLiteratura;
     private JButton przyciskHistoria;
     private Kategoria kategoria;
+    private User user;
     IPobierzPytanie pytania;
+    private ICredentialHandler hndlr;
     
     
-    public Wybor_Kategorii()
+    public Wybor_Kategorii(User us, ICredentialHandler hand)
     {
+        user=us;
        pytania=new DostanPytanieZPliku();
+       hndlr=hand;
        initJFramePanelFrame();
        initJButtonSport();
        initJButtonPolityka();
@@ -99,9 +104,11 @@ public class Wybor_Kategorii implements  ActionListener {
             
              try {
                  //pytania.PobierzPytanie(kategoria);
-                  new Okno_Pytania(pytania,kategoria);
+                  new Okno_Pytania(pytania,kategoria,user,hndlr);
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
+                 Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IOException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
          }
@@ -110,9 +117,11 @@ public class Wybor_Kategorii implements  ActionListener {
              Kategoria kategoria=Kategoria.Polityka;
               try {
               //   ustawPytanie.PobierzPytanie(kategoria);
-                 new Okno_Pytania(pytania,kategoria);
+                 new Okno_Pytania(pytania,kategoria,user,hndlr);
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
+                 Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IOException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
          }
@@ -122,9 +131,11 @@ public class Wybor_Kategorii implements  ActionListener {
              try {
 
                 // ustawPytanie.PobierzPytanie(kategoria);
-                 new Okno_Pytania(pytania,kategoria);
+                 new Okno_Pytania(pytania,kategoria,user,hndlr);
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
+                 Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IOException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
          }
@@ -133,10 +144,12 @@ public class Wybor_Kategorii implements  ActionListener {
              Kategoria kategoria=Kategoria.Literatura;
              try {
                 // ustawPytanie.PobierzPytanie(kategoria);
-                   new Okno_Pytania(pytania,kategoria);
+                   new Okno_Pytania(pytania,kategoria,user,hndlr);
                     framePanel.dispose();
 
              } catch (FileNotFoundException ex) {
+                 Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IOException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
          }
@@ -146,9 +159,11 @@ public class Wybor_Kategorii implements  ActionListener {
              
               try {
                  //pytania.PobierzPytanie(kategoria);
-                   new Okno_Pytania(pytania,kategoria);
+                   new Okno_Pytania(pytania,kategoria,user,hndlr);
                     framePanel.dispose();
              } catch (FileNotFoundException ex) {
+                 Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IOException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
          }

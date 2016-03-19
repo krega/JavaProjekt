@@ -116,8 +116,9 @@ public class Panel_Logowania extends JFrame implements ActionListener {
 
         if (src == OK) {
             if(sprawdzLogin()==true){
-                Credentials Cr=new Credentials(Login.getText(),new String(HasloPasswordField.getPassword()));
-                itsGlowneOkno=new Glowne_Okno(new User(Cr));
+             //   Credentials Cr=new Credentials(Login.getText(),new String(HasloPasswordField.getPassword()));
+               // User user=new User(Cr)
+              //  itsGlowneOkno=new Glowne_Okno(new User(Cr));
                 panelFrame.dispose();
             }
         } else if (src == Rejestracja) {
@@ -152,13 +153,15 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         String passString = new String(HasloPasswordField.getPassword());
 //           ICredentialHandler credHnd = new dbCredentialHandler(url);
 
-        Iterator<Map.Entry<String, String>> entries = mapa.entrySet().iterator();
+        Iterator<Map.Entry<String, User>> entries = mapa.entrySet().iterator();
         while (entries.hasNext()) {
-            Map.Entry<String, String> entry = entries.next();
-            String key = entry.getKey();
-            String value = entry.getValue();
-            if (key.equals(LoginTextField.getText()) && value.equals(passString)) {
+            Map.Entry<String, User> entry = entries.next();          
+          Credentials value=entry.getValue().getCredential();
+           if(value.getLogin().equals(LoginTextField.getText())&&value.getHaslo().equals(passString)){
                 sprawdz = true;
+                User user=entry.getValue();
+                user.setMapaWynikow(entry.getValue().getMapaWynikow());
+                itsGlowneOkno=new Glowne_Okno(user,itsCredentialHandler);
 
             }
 

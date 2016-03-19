@@ -15,6 +15,9 @@ public interface ICredentialHandler {
 
     HashMap Odczyt() throws IOException;
 
-    public void zapisNowegoUzytkownika(Credentials Cr1) throws IOException;
+    void zapisNowegoUzytkownika(Credentials Cr1) throws IOException;
+    void zapiszWynik() throws IOException;
+   
+   
 
 }
