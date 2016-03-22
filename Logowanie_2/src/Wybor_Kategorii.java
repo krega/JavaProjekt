@@ -32,11 +32,9 @@ public class Wybor_Kategorii implements  ActionListener {
     private ICredentialHandler hndlr;
     
     
-<<<<<<< HEAD
+
     public Wybor_Kategorii(User us, ICredentialHandler hand)
-=======
-    public Wybor_Kategorii(User us)
->>>>>>> bb45147f683b1290362db041a0bc49853a92989c
+
     {
         user=us;
        pytania=new DostanPytanieZPliku();
@@ -108,11 +106,9 @@ public class Wybor_Kategorii implements  ActionListener {
             
              try {
                  //pytania.PobierzPytanie(kategoria);
-<<<<<<< HEAD
+
                   new Okno_Pytania(pytania,kategoria,user,hndlr);
-=======
-                  new Okno_Pytania(pytania,kategoria,user);
->>>>>>> bb45147f683b1290362db041a0bc49853a92989c
+
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,11 +121,9 @@ public class Wybor_Kategorii implements  ActionListener {
              Kategoria kategoria=Kategoria.Polityka;
               try {
               //   ustawPytanie.PobierzPytanie(kategoria);
-<<<<<<< HEAD
+
                  new Okno_Pytania(pytania,kategoria,user,hndlr);
-=======
-                 new Okno_Pytania(pytania,kategoria,user);
->>>>>>> bb45147f683b1290362db041a0bc49853a92989c
+
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
@@ -143,11 +137,9 @@ public class Wybor_Kategorii implements  ActionListener {
              try {
 
                 // ustawPytanie.PobierzPytanie(kategoria);
-<<<<<<< HEAD
+
                  new Okno_Pytania(pytania,kategoria,user,hndlr);
-=======
-                 new Okno_Pytania(pytania,kategoria,user);
->>>>>>> bb45147f683b1290362db041a0bc49853a92989c
+
                   framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,11 +152,9 @@ public class Wybor_Kategorii implements  ActionListener {
              Kategoria kategoria=Kategoria.Literatura;
              try {
                 // ustawPytanie.PobierzPytanie(kategoria);
-<<<<<<< HEAD
+
                    new Okno_Pytania(pytania,kategoria,user,hndlr);
-=======
-                   new Okno_Pytania(pytania,kategoria,user);
->>>>>>> bb45147f683b1290362db041a0bc49853a92989c
+
                     framePanel.dispose();
 
              } catch (FileNotFoundException ex) {
@@ -179,14 +169,12 @@ public class Wybor_Kategorii implements  ActionListener {
              
               try {
                  //pytania.PobierzPytanie(kategoria);
-<<<<<<< HEAD
                    new Okno_Pytania(pytania,kategoria,user,hndlr);
-=======
-                   new Okno_Pytania(pytania,kategoria,user);
->>>>>>> bb45147f683b1290362db041a0bc49853a92989c
+
                     framePanel.dispose();
              } catch (FileNotFoundException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
+             
              } catch (IOException ex) {
                  Logger.getLogger(Wybor_Kategorii.class.getName()).log(Level.SEVERE, null, ex);
              }
