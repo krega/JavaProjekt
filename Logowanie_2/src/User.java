@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +10,11 @@ import javafx.util.Pair;
 import javax.swing.JOptionPane;
 
 /*
+=======
+import javax.swing.JOptionPane;
+
+    /*
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -20,6 +26,7 @@ import javax.swing.JOptionPane;
 public class User {
 
     private Credentials Credential;
+<<<<<<< HEAD
     private HashMap<Kategoria, Pair> mapaWynikow;
 
     public User(Credentials Cr, HashMap mapa) {
@@ -63,6 +70,86 @@ public class User {
             }
         }
         return mapaWynikow;
+=======
+    private int poprawnaOdpowiedzPolityka;
+    private int niepoprawnaOdpowiedzPolityka;
+    private int poprawnaOdpowiedzHistoria;
+    private int niepoprawnaOdpowiedzHistoria;
+    private int poprawnaOdpowiedzSport;
+    private int niepoprawnaOdpowiedzSport;
+    private int poprawnaOdpowiedzLiteratura;
+    private int niepoprawnaOdpowiedzLiteratura;
+    private int poprawnaOdpowiedzSztuka;
+    private int niepoprawnaOdpowiedzSztuka;
+    
+    public User(Credentials Cr)
+    {
+         Credential=Cr;
+         
+        
     }
+    public void dodajPoprawnaOdpowiedz(Kategoria kat)
+    {
+        if(kat.toString()=="Polityka")
+        {
+            poprawnaOdpowiedzPolityka++;
+        }
+       else if(kat.toString()=="Historia")
+        {
+            poprawnaOdpowiedzHistoria++;
+        }
+      else  if(kat.toString()=="Sport")
+        {
+            poprawnaOdpowiedzSport++;
+        }
+      else  if(kat.toString()=="Literatura")
+        {
+            poprawnaOdpowiedzLiteratura++;
+        }
+       else if(kat.toString()=="Sztuka")
+        {
+            poprawnaOdpowiedzSztuka++;
+        }
+       else 
+       {
+           JOptionPane.showMessageDialog(null, "Blad, nie wyszukano kategorii (user)");
 
+       }
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
+    }
+    public void dodajNiepoprawnaOdpowiedz(Kategoria kat)
+    {
+        {
+        if(kat.toString()=="Polityka")
+        {
+            niepoprawnaOdpowiedzPolityka++;
+        }
+       else if(kat.toString()=="Historia")
+        {
+            niepoprawnaOdpowiedzHistoria++;
+        }
+      else  if(kat.toString()=="Sport")
+        {
+            niepoprawnaOdpowiedzSport++;
+        }
+      else  if(kat.toString()=="Literatura")
+        {
+            niepoprawnaOdpowiedzLiteratura++;
+        }
+       else if(kat.toString()=="Sztuka")
+        {
+            niepoprawnaOdpowiedzSztuka++;
+        }
+       else 
+       {
+           JOptionPane.showMessageDialog(null, "Blad, nie wyszukano kategorii (user)");
+
+<<<<<<< HEAD
+=======
+       }
+    }
+    }
+    
+    
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
 }

@@ -38,10 +38,15 @@ public class Okno_Pytania implements ActionListener {
     private int poprawneOdpowiedzi, zleOdpowiedzi;
     private ICredentialHandler hndl;
 
+<<<<<<< HEAD
     public Okno_Pytania(IPobierzPytanie pytanie, Kategoria kat, User us,ICredentialHandler hand) throws FileNotFoundException, IOException {
         user=us;
         poprawneOdpowiedzi=0;
         zleOdpowiedzi=0;
+=======
+    public Okno_Pytania(IPobierzPytanie pytanie, Kategoria kat, User us) throws FileNotFoundException {
+        user=us;
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
         kategoria = kat;
         listaPytan = pytanie.PobierzPytanie(kategoria);
         losowanie = new Losowanie(listaPytan.size());
@@ -146,6 +151,7 @@ public class Okno_Pytania implements ActionListener {
             if (odpowiedz_1Button.getText().equals(pytanie.odp1)) {
 
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+<<<<<<< HEAD
                 poprawneOdpowiedzi++;
                 
             } else {
@@ -156,6 +162,12 @@ public class Okno_Pytania implements ActionListener {
                 ustawPytanie();
             } catch (IOException ex) {
                 Logger.getLogger(Okno_Pytania.class.getName()).log(Level.SEVERE, null, ex);
+=======
+                user.dodajPoprawnaOdpowiedz(kategoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
             }
             zmianaPytania();
 
@@ -163,6 +175,7 @@ public class Okno_Pytania implements ActionListener {
         if (src == odpowiedz_2Button) {
             if (odpowiedz_2Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+<<<<<<< HEAD
                 poprawneOdpowiedzi++;
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
@@ -173,6 +186,12 @@ public class Okno_Pytania implements ActionListener {
                 ustawPytanie();
             } catch (IOException ex) {
                 Logger.getLogger(Okno_Pytania.class.getName()).log(Level.SEVERE, null, ex);
+=======
+                user.dodajPoprawnaOdpowiedz(kategoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
             }
             zmianaPytania();
 
@@ -180,6 +199,7 @@ public class Okno_Pytania implements ActionListener {
         if (src == odpowiedz_3Button) {
             if (odpowiedz_3Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+<<<<<<< HEAD
                poprawneOdpowiedzi++;
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
@@ -190,6 +210,12 @@ public class Okno_Pytania implements ActionListener {
                 ustawPytanie();
             } catch (IOException ex) {
                 Logger.getLogger(Okno_Pytania.class.getName()).log(Level.SEVERE, null, ex);
+=======
+                user.dodajPoprawnaOdpowiedz(kategoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
             }
             zmianaPytania();
 
@@ -197,6 +223,7 @@ public class Okno_Pytania implements ActionListener {
         if (src == odpowiedz_4Button) {
             if (odpowiedz_4Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
+<<<<<<< HEAD
                    poprawneOdpowiedzi++;
 
             } else {
@@ -208,6 +235,12 @@ public class Okno_Pytania implements ActionListener {
                 ustawPytanie();
             } catch (IOException ex) {
                 Logger.getLogger(Okno_Pytania.class.getName()).log(Level.SEVERE, null, ex);
+=======
+                user.dodajPoprawnaOdpowiedz(kategoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "Niepoprawna odpowiedz");
+                user.dodajNiepoprawnaOdpowiedz(kategoria);
+>>>>>>> bb45147f683b1290362db041a0bc49853a92989c
             }
             zmianaPytania();
 
