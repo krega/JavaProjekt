@@ -84,6 +84,8 @@ public class FileCredentialHandler implements ICredentialHandler {
 
     @Override
     public void zapisNowegoUzytkownika(Credentials Cr1) throws IOException {
+        new Sprawdz_String(Cr1.getHaslo()).sprawdzString();
+        
         FileWriter napisz = new FileWriter(sciezka, true);
         BufferedWriter bw = new BufferedWriter(napisz);
         for (int y = 0; y < Cr1.getLogin().length(); y++) {
