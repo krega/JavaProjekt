@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="User" table ="USER">
+        <meta attribute="class-description">
+            This class contains the User detail. 
+        </meta>
+        <id name="id" type="long" column="ID">
+            <generator class="native"/>
+        </id>
+      <map name="mapaWynikow" cascade="all">
+      <key column="Kategoria"/>
+      <index column="Odpowiedzi" type="long"/>
+      <one-to-many class="User"/>
+      </map>  
+    
+      <component name="credentials" class="Credentials">
+      <property name ="Login" column="LOGIN" type="string"/>
+      <property name ="Haslo" column="HASLO" type="string"/>
+      </component>     
+       </class>
+       
+      
+   
+  
+</hibernate-mapping>
+    

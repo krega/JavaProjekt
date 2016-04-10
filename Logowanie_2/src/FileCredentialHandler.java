@@ -84,8 +84,10 @@ public class FileCredentialHandler implements ICredentialHandler {
 
     @Override
     public void zapisNowegoUzytkownika(Credentials Cr1) throws IOException {
-        new Sprawdz_String(Cr1.getHaslo()).sprawdzString();
-        
+        //new Sprawdz_String(Cr1.getHaslo()).sprawdzString();
+        boolean sprawdz_String=false;
+        sprawdz_String=new Sprawdz_String(Cr1.getHaslo()).sprawdzString();;
+        if(sprawdz_String==true){
         FileWriter napisz = new FileWriter(sciezka, true);
         BufferedWriter bw = new BufferedWriter(napisz);
         for (int y = 0; y < Cr1.getLogin().length(); y++) {
@@ -118,6 +120,7 @@ public class FileCredentialHandler implements ICredentialHandler {
         bw.newLine();
         bw.close();
         napisz.close();
+        }
     }
     @Override
  public void zapiszWynik() throws IOException
@@ -128,10 +131,10 @@ public class FileCredentialHandler implements ICredentialHandler {
         Iterator<Map.Entry<String,User>> entries =passmap.entrySet().iterator();
        while (entries.hasNext()){
                        Map.Entry<String,User> entry = entries.next();
-                        Object key = entry.getValue().getCredential().getLogin();
+                        Object key = entry.getValue().getCredentials().getLogin();
                         bw.write(key.toString());
                         bw.write("|");
-                        Object value=entry.getValue().getCredential().getHaslo();
+                        Object value=entry.getValue().getCredentials().getHaslo();
                         bw.write(value.toString());
                         bw.write("|");
                       

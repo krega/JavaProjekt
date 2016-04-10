@@ -1,13 +1,15 @@
 
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javafx.util.Pair;
-import javax.swing.JOptionPane;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.MapKeyColumn;
 
 /*
 =======
@@ -25,30 +27,47 @@ import javax.swing.JOptionPane;
  */
 public class User {
 
-    private Credentials Credential;
-
+    private long id;
     private HashMap<Kategoria, Pair> mapaWynikow;
+    private Credentials credentials;
 
     public User(Credentials Cr, HashMap mapa) {
-        Credential = Cr;
+        id = new Long(0);
+        credentials = Cr;
         mapaWynikow = mapa;
+    }
 
+    public User() {
+        id = new Long(0);
     }
 
     public User(Credentials Cr) {
-        Credential = Cr;
+        id = new Long(0);
+        credentials = Cr;
     }
 
-    public void setMapaWynikow(HashMap mapa) {
-        mapaWynikow = mapa;
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 
-    public HashMap getMapaWynikow() {
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public HashMap<Kategoria, Pair> getMapaWynikow() {
         return mapaWynikow;
     }
 
-    public Credentials getCredential() {
-        return Credential;
+    public void setMapaWynikow(HashMap<Kategoria, Pair> mapaWynikow) {
+        this.mapaWynikow = mapaWynikow;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public HashMap dodajOdpowiedzi(Kategoria kat, int poprawneOdpowiedzi, int zle) {
@@ -70,10 +89,7 @@ public class User {
             }
         }
         return mapaWynikow;
-       }
     }
-    
-    
-    
 
-
+    
+}

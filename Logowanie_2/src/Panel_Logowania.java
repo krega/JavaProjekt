@@ -131,6 +131,7 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     public void NewUser(Credentials Cr) throws IOException {
 
         itsCredentialHandler.zapisNowegoUzytkownika(Cr);
+      
 
     }
 
@@ -151,12 +152,12 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         Boolean sprawdz = false;
 
         String passString = new String(HasloPasswordField.getPassword());
-//           ICredentialHandler credHnd = new dbCredentialHandler(url);
+//          ICredentialHandler credHnd = new dbCredentialHandler(url);
 
         Iterator<Map.Entry<String, User>> entries = mapa.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry<String, User> entry = entries.next();          
-          Credentials value=entry.getValue().getCredential();
+          Credentials value=entry.getValue().getCredentials();
            if(value.getLogin().equals(LoginTextField.getText())&&value.getHaslo().equals(passString)){
                 sprawdz = true;
                 User user=entry.getValue();

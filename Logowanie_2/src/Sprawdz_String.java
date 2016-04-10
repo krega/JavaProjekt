@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
 public class Sprawdz_String {
    
     private Matcher stringDoSprawdzenia;
-  private String patternString ="([0-9])?(@)+([A-Z1-9])";
-  private String patternStr="[A-Z]";
+    private String patternString ="([0-9])?(@)+([A-Z1-9])";
+//  private String patternStr="[A-Z]";
   // String patternStr=[A-Z];
   private Pattern pattern= Pattern.compile(patternString);
     
