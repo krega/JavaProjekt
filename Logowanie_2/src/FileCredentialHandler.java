@@ -48,8 +48,8 @@ public class FileCredentialHandler implements ICredentialHandler {
         StringTokenizer token;
         String l, u, lp1, lp2, lp3, lp4, lp5, lp6, lp7, lp8, lp9, lp10;
 
+        HashMap<Kategoria, Pair> mapaWynikow = new HashMap();
         while (odczyt.hasNextLine()) {
-            HashMap<Kategoria, Pair> mapaWynikow = new HashMap();
 
             token = new StringTokenizer(odczyt.nextLine(), "|");
             l = token.nextToken();
@@ -85,82 +85,77 @@ public class FileCredentialHandler implements ICredentialHandler {
     @Override
     public void zapisNowegoUzytkownika(Credentials Cr1) throws IOException {
         //new Sprawdz_String(Cr1.getHaslo()).sprawdzString();
-        boolean sprawdz_String=false;
-        sprawdz_String=new Sprawdz_String(Cr1.getHaslo()).sprawdzString();;
-        if(sprawdz_String==true){
-        FileWriter napisz = new FileWriter(sciezka, true);
-        BufferedWriter bw = new BufferedWriter(napisz);
-        for (int y = 0; y < Cr1.getLogin().length(); y++) {
-            bw.write(Cr1.getLogin().charAt(y));
-        }
-        bw.write("|");
-        for (int x = 0; x < Cr1.getHaslo().length(); x++) {
-            bw.write(Cr1.getHaslo().charAt(x));
-        }
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.write("|");
-        bw.write("0");
-        bw.newLine();
-        bw.close();
-        napisz.close();
+        Sprawdz_String ss = new Sprawdz_String(Cr1.getHaslo());
+        boolean sprawdz_String = ss.sprawdzString();
+        if (sprawdz_String == true) {
+            FileWriter napisz = new FileWriter(sciezka, true);
+            BufferedWriter bw = new BufferedWriter(napisz);
+            for (int y = 0; y < Cr1.getLogin().length(); y++) {
+                bw.write(Cr1.getLogin().charAt(y));
+            }
+            bw.write("|");
+            for (int x = 0; x < Cr1.getHaslo().length(); x++) {
+                bw.write(Cr1.getHaslo().charAt(x));
+            }
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.write("|");
+            bw.write("0");
+            bw.newLine();
+            bw.close();
+            napisz.close();
         }
     }
+
     @Override
- public void zapiszWynik() throws IOException
-    {
-        File file=new File(sciezka);
+    public void zapiszWynik() throws IOException {
+        File file = new File(sciezka);
         FileWriter napisz = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bw = new BufferedWriter(napisz);
-        Iterator<Map.Entry<String,User>> entries =passmap.entrySet().iterator();
-       while (entries.hasNext()){
-                       Map.Entry<String,User> entry = entries.next();
-                        Object key = entry.getValue().getCredentials().getLogin();
-                        bw.write(key.toString());
-                        bw.write("|");
-                        Object value=entry.getValue().getCredentials().getHaslo();
-                        bw.write(value.toString());
-                        bw.write("|");
-                      
-          Iterator<Map.Entry<Kategoria,Pair>> entries2= entry.getValue().getMapaWynikow().entrySet().iterator();
-
-       while (entries2.hasNext()) {
-            Map.Entry<Kategoria, Pair> entry2 = entries2.next();
-            Object key2 = entry2.getValue().getKey();
-            Object value2 = entry2.getValue().getValue();
-            bw.write(key2.toString());
+        Iterator<Map.Entry<String, User>> entries = passmap.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<String, User> entry = entries.next();
+            Object key = entry.getValue().getCredentials().getLogin();
+            bw.write(key.toString());
             bw.write("|");
-            bw.write(value2.toString());
+            Object value = entry.getValue().getCredentials().getHaslo();
+            bw.write(value.toString());
             bw.write("|");
 
-          }
-         bw.newLine();
+            Iterator<Map.Entry<Kategoria, Pair>> entries2 = entry.getValue().getMapaWynikow().entrySet().iterator();
 
-       }
-       
+            while (entries2.hasNext()) {
+                Map.Entry<Kategoria, Pair> entry2 = entries2.next();
+                Object key2 = entry2.getValue().getKey();
+                Object value2 = entry2.getValue().getValue();
+                bw.write(key2.toString());
+                bw.write("|");
+                bw.write(value2.toString());
+                bw.write("|");
+
+            }
+            bw.newLine();
+
+        }
+
         bw.close();
         napisz.close();
-            
 
-
-    
-    
-
-}
+    }
 }

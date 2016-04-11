@@ -32,7 +32,6 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     private ICredentialHandler itsCredentialHandler;
     private Panel_Rejestracji itsPanelRejestracji;
     private Glowne_Okno itsGlowneOkno;
-    
 
     public Panel_Logowania() {
     }
@@ -115,10 +114,10 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         Object src = e.getSource();
 
         if (src == OK) {
-            if(sprawdzLogin()==true){
-             //   Credentials Cr=new Credentials(Login.getText(),new String(HasloPasswordField.getPassword()));
-               // User user=new User(Cr)
-              //  itsGlowneOkno=new Glowne_Okno(new User(Cr));
+            if (sprawdzLogin() == true) {
+                //   Credentials Cr=new Credentials(Login.getText(),new String(HasloPasswordField.getPassword()));
+                // User user=new User(Cr)
+                //  itsGlowneOkno=new Glowne_Okno(new User(Cr));
                 panelFrame.dispose();
             }
         } else if (src == Rejestracja) {
@@ -131,18 +130,17 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     public void NewUser(Credentials Cr) throws IOException {
 
         itsCredentialHandler.zapisNowegoUzytkownika(Cr);
-      
 
     }
 
     private boolean sprawdzLogin() throws HeadlessException {
 
         if (porownajPassy() == true) {
-            
+
             JOptionPane.showMessageDialog(null, "Witaj " + LoginTextField.getText());
             return true;
         } else {
-            
+
             JOptionPane.showMessageDialog(null, "Blad Logowania");
             return false;
         }
@@ -156,13 +154,13 @@ public class Panel_Logowania extends JFrame implements ActionListener {
 
         Iterator<Map.Entry<String, User>> entries = mapa.entrySet().iterator();
         while (entries.hasNext()) {
-            Map.Entry<String, User> entry = entries.next();          
-          Credentials value=entry.getValue().getCredentials();
-           if(value.getLogin().equals(LoginTextField.getText())&&value.getHaslo().equals(passString)){
+            Map.Entry<String, User> entry = entries.next();
+            Credentials value = entry.getValue().getCredentials();
+            if (value.getLogin().equals(LoginTextField.getText()) && value.getHaslo().equals(passString)) {
                 sprawdz = true;
-                User user=entry.getValue();
+                User user = entry.getValue();
                 user.setMapaWynikow(entry.getValue().getMapaWynikow());
-                itsGlowneOkno=new Glowne_Okno(user,itsCredentialHandler);
+                itsGlowneOkno = new Glowne_Okno(user, itsCredentialHandler);
 
             }
 

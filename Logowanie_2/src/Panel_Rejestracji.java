@@ -107,11 +107,8 @@ public class Panel_Rejestracji extends JFrame implements ActionListener {
         String passString = new String(Haslo_1.getPassword());
         Credentials Cr = new Credentials(Login_1.getText(), passString);
         User nowy = new User(Cr);
-           boolean sprawdz_String=false;
-           int a;
-        sprawdz_String=new Sprawdz_String(passString).sprawdzString();;
         try {
-            if (saveNewUser(Cr) == true&& sprawdz_String==true) {
+            if (saveNewUser(Cr) == true) {
                 panelLogowania.NewUser(Cr);
                 JOptionPane.showMessageDialog(null, "Rejestracja przebiegla pomyslnie");
                 PanelFrame.dispose();
