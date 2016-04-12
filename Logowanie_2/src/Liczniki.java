@@ -24,28 +24,41 @@
  * 
  */
 public class Liczniki {
-    private String Key;
-    private String Value;
-    public Liczniki(String pierwszy, String drugi)
+    private int id;
+    private int Poprawne;
+    private int Niepoprawne;
+    
+    public Liczniki() {
+        Poprawne=-1;
+        Niepoprawne=-1;
+    }
+    public Liczniki(int pierwszy, int drugi)
     {
-        Key=pierwszy;
-        Value=drugi;
+        Poprawne=pierwszy;
+        Niepoprawne=drugi;
     }
 
-    public String getKey() {
-        return Key;
+    public int getPoprawne() {
+        return Poprawne;
     }
 
-    public void setKey(String Key) {
-        this.Key = Key;
+    public void setPoprawne(int Poprawne) {
+        this.Poprawne = Poprawne;
     }
 
-    public String getValue() {
-        return Value;
+    public int getNiepoprawne() {
+        return Niepoprawne;
     }
 
-    public void setValue(String Value) {
-        this.Value = Value;
+    public void setNiepoprawne(int Niepoprawne) {
+        this.Niepoprawne = Niepoprawne;
     }
+    
+    public int getId() {
+      return id;
+   }
+   public void setId( int id ) {
+      this.id = id;
+   }
     
 }

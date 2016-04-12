@@ -25,9 +25,9 @@ public class Logowanie_2 {
 //            System.err.println("Failed to create sessionFactory object." + ex);
 //            throw new ExceptionInInitializerError(ex);
 //        }
-//        ManageUser MU = new ManageUser();
-//        MU.addUser(new Credentials("111","hhhhsasah"));
-//        MU.addUser(new Credentials("222","hh"));
+        ManageUser MU = new ManageUser();
+        MU.addUser(new Credentials("111","hhhhsasah"));
+        MU.addUser(new Credentials("222","hh"));
         
 //        MU.addUser(MU.addCredential("aaa", "bbbb"));
 //        MU.listEmployees();

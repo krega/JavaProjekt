@@ -10,19 +10,29 @@
         <id name="id" type="long" column="ID">
             <generator class="native"/>
         </id>
-      <map name="mapaWynikow" cascade="all">
-      <key column="Kategoria"/>
-      <index column="Odpowiedzi" type="long"/>
-      <one-to-many class="User"/>
-      </map>  
-    
-      <component name="credentials" class="Credentials">
-      <property name ="Login" column="LOGIN" type="string"/>
-      <property name ="Haslo" column="HASLO" type="string"/>
-      </component>     
-       </class>
-       
+     <map name="mapaWynikowS" cascade="all">
+            <key column="user_id"/>
+            <index column="kategoria" type="string"/>
+            <one-to-many class="Liczniki"/>
+        </map>
       
+        <component name="credentials" class="Credentials">
+            <property name ="Login" column="LOGIN" type="string"/>
+            <property name ="Haslo" column="HASLO" type="string"/>
+        </component>     
+    </class>
+       
+ <class name="Liczniki" table="LICZNIKI">
+      <meta attribute="class-description">
+         This class contains the liczniki records. 
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="Poprawne" column="POPRAWNE" type="string"/>
+      <property name="Niepoprawne" column="NIEPOPRAWNE" type="string"/>
+  
+ </class>
    
   
 </hibernate-mapping>

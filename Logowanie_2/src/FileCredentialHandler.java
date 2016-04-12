@@ -48,7 +48,7 @@ public class FileCredentialHandler implements ICredentialHandler {
         StringTokenizer token;
         String l, u, lp1, lp2, lp3, lp4, lp5, lp6, lp7, lp8, lp9, lp10;
 
-        HashMap<Kategoria, Pair> mapaWynikow = new HashMap();
+        HashMap<Kategoria, Liczniki> mapaWynikow = new HashMap();
         while (odczyt.hasNextLine()) {
 
             token = new StringTokenizer(odczyt.nextLine(), "|");
@@ -56,23 +56,23 @@ public class FileCredentialHandler implements ICredentialHandler {
             u = token.nextToken();
             lp1 = token.nextToken();
             lp2 = token.nextToken();
-            Pair pair1 = new Pair(lp1, lp2);
+            Liczniki pair1 = new Liczniki(Integer.parseInt(lp1), Integer.parseInt(lp2));
             mapaWynikow.put(Kategoria.Historia, pair1);
             lp3 = token.nextToken();
             lp4 = token.nextToken();
-            Pair pair2 = new Pair(lp3, lp4);
+            Liczniki pair2 = new Liczniki(Integer.parseInt(lp3), Integer.parseInt(lp4));
             mapaWynikow.put(Kategoria.Literatura, pair2);
             lp5 = token.nextToken();
             lp6 = token.nextToken();
-            Pair pair3 = new Pair(lp5, lp6);
+            Liczniki pair3 = new Liczniki(Integer.parseInt(lp5), Integer.parseInt(lp6));
             mapaWynikow.put(Kategoria.Polityka, pair3);
             lp7 = token.nextToken();
             lp8 = token.nextToken();
-            Pair pair4 = new Pair(lp7, lp8);
+            Liczniki pair4 = new Liczniki(Integer.parseInt(lp7), Integer.parseInt(lp8));
             mapaWynikow.put(Kategoria.Sport, pair4);
             lp9 = token.nextToken();
             lp10 = token.nextToken();
-            Pair pair5 = new Pair(lp9, lp10);
+            Liczniki pair5 = new Liczniki(Integer.parseInt(lp9), Integer.parseInt(lp10));
             mapaWynikow.put(Kategoria.Sztuka, pair5);
             Credentials cr = new Credentials(l, u);
 
@@ -138,12 +138,12 @@ public class FileCredentialHandler implements ICredentialHandler {
             bw.write(value.toString());
             bw.write("|");
 
-            Iterator<Map.Entry<Kategoria, Pair>> entries2 = entry.getValue().getMapaWynikow().entrySet().iterator();
-
+            Iterator<Map.Entry<Kategoria, Liczniki>> entries2 = entry.getValue().getMapaWynikow().entrySet().iterator();
+//              Iterator<Map.Entry<Kategoria,Pair>>entries2=entry.getValue().getMapaWynikow().entrySet().iterator();
             while (entries2.hasNext()) {
-                Map.Entry<Kategoria, Pair> entry2 = entries2.next();
-                Object key2 = entry2.getValue().getKey();
-                Object value2 = entry2.getValue().getValue();
+                Map.Entry<Kategoria, Liczniki> entry2 = entries2.next();
+                Object key2 = entry2.getValue().getPoprawne();
+                Object value2 = entry2.getValue().getNiepoprawne();
                 bw.write(key2.toString());
                 bw.write("|");
                 bw.write(value2.toString());

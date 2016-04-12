@@ -26,10 +26,6 @@ public ManageUser()
          System.err.println("Failed to create sessionFactory object." + ex);
          throw new ExceptionInInitializerError(ex); 
       }
-      HashMap set = new HashMap();
-      set.put("ComputerScience","a");
-      set.put("BusinessManagement", "v");
-      set.put("ProjectManagement","z");
       
 }
  public Long addUser(Credentials CR){

@@ -28,7 +28,16 @@ import javax.swing.JOptionPane;
 public class User {
 
     private long id;
-    private HashMap<Kategoria, Pair> mapaWynikow;
+    private HashMap<Kategoria, Liczniki> mapaWynikow;
+    private Map mapaWynikowS;
+
+    public Map getMapaWynikowS() {
+        return mapaWynikowS;
+    }
+
+    public void setMapaWynikowS(Map mapaWynikowS) {
+        this.mapaWynikowS = mapaWynikowS;
+    }
     private Credentials credentials;
 
     public User(Credentials Cr, HashMap mapa) {
@@ -39,11 +48,19 @@ public class User {
 
     public User() {
         id = new Long(0);
+        mapaWynikowS = new HashMap<String, Liczniki>();
+        mapaWynikowS.put("Sztuka", new Liczniki(1,2));
+        mapaWynikowS.put("Historia", new Liczniki(7,8));
+        mapaWynikowS.put("Sport", new Liczniki(2,4));
     }
 
     public User(Credentials Cr) {
         id = new Long(0);
         credentials = Cr;
+        mapaWynikow = new HashMap<Kategoria, Liczniki>();
+        mapaWynikow.put(Kategoria.Sztuka, new Liczniki(1,2));
+        mapaWynikow.put(Kategoria.Historia, new Liczniki(7,8));
+        mapaWynikow.put(Kategoria.Sport, new Liczniki(2,4));
     }
 
     public void setCredentials(Credentials credentials) {
@@ -54,11 +71,11 @@ public class User {
         return credentials;
     }
 
-    public HashMap<Kategoria, Pair> getMapaWynikow() {
+    public HashMap<Kategoria, Liczniki> getMapaWynikow() {
         return mapaWynikow;
     }
 
-    public void setMapaWynikow(HashMap<Kategoria, Pair> mapaWynikow) {
+    public void setMapaWynikow(HashMap<Kategoria, Liczniki> mapaWynikow) {
         this.mapaWynikow = mapaWynikow;
     }
 
@@ -71,20 +88,20 @@ public class User {
     }
 
     public HashMap dodajOdpowiedzi(Kategoria kat, int poprawneOdpowiedzi, int zle) {
-        Iterator<Map.Entry<Kategoria, Pair>> entries = mapaWynikow.entrySet().iterator();
+        Iterator<Map.Entry<Kategoria, Liczniki>> entries = mapaWynikow.entrySet().iterator();
         while (entries.hasNext()) {
-            Map.Entry<Kategoria, Pair> entry = entries.next();
+            Map.Entry<Kategoria, Liczniki> entry = entries.next();
             Object key = entry.getKey();
             if (key.equals(kat)) {
-                Object value = entry.getValue().getValue();
+                Object value = entry.getValue().getNiepoprawne();
                 int punkt = Integer.parseInt(value.toString());
                 punkt = punkt + poprawneOdpowiedzi;
                 value = Integer.parseInt(value.toString()) + punkt;
-                Object keyy = entry.getValue().getKey();
+                Object keyy = entry.getValue().getPoprawne();
                 int zlaOdpowiedz = Integer.parseInt(keyy.toString());
                 zlaOdpowiedz = zlaOdpowiedz + zle;
                 mapaWynikow.remove(key, value);
-                Pair pair = new Pair(punkt, zlaOdpowiedz);
+                Liczniki pair = new Liczniki(punkt, zlaOdpowiedz);
                 mapaWynikow.put(kat, pair);
             }
         }
