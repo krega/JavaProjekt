@@ -1,15 +1,23 @@
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import javafx.util.Pair;
+import javax.persistence.Column;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyEnumerated;
+
+import javax.persistence.OneToMany;
+
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 
 /*
 =======
@@ -25,19 +33,18 @@ import javax.swing.JOptionPane;
  *
  * @author Kamil
  */
-public class User {
+@javax.persistence.Entity
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
     private long id;
-    private HashMap<Kategoria, Liczniki> mapaWynikow;
-    private Map mapaWynikowS;
+    
+    @OneToMany(mappedBy="user", targetEntity = Liczniki.class)
+    @MapKey(name="poprawne")
+    private Map<String, Liczniki> mapaWynikow;
 
-    public Map getMapaWynikowS() {
-        return mapaWynikowS;
-    }
-
-    public void setMapaWynikowS(Map mapaWynikowS) {
-        this.mapaWynikowS = mapaWynikowS;
-    }
     private Credentials credentials;
 
     public User(Credentials Cr, HashMap mapa) {
@@ -46,21 +53,13 @@ public class User {
         mapaWynikow = mapa;
     }
 
-    public User() {
-        id = new Long(0);
-        mapaWynikowS = new HashMap<String, Liczniki>();
-        mapaWynikowS.put("Sztuka", new Liczniki(1,2));
-        mapaWynikowS.put("Historia", new Liczniki(7,8));
-        mapaWynikowS.put("Sport", new Liczniki(2,4));
-    }
-
     public User(Credentials Cr) {
         id = new Long(0);
         credentials = Cr;
-        mapaWynikow = new HashMap<Kategoria, Liczniki>();
-        mapaWynikow.put(Kategoria.Sztuka, new Liczniki(1,2));
-        mapaWynikow.put(Kategoria.Historia, new Liczniki(7,8));
-        mapaWynikow.put(Kategoria.Sport, new Liczniki(2,4));
+        mapaWynikow = new HashMap<String, Liczniki>();
+        mapaWynikow.put(Kategoria.Sztuka, new Liczniki(1, 2));
+        mapaWynikow.put(Kategoria.Historia, new Liczniki(7, 8));
+        mapaWynikow.put(Kategoria.Sport, new Liczniki(2, 4));
     }
 
     public void setCredentials(Credentials credentials) {
@@ -70,13 +69,13 @@ public class User {
     public Credentials getCredentials() {
         return credentials;
     }
-
-    public HashMap<Kategoria, Liczniki> getMapaWynikow() {
+    
+    public Map<String, Liczniki> getMapaWynikow() {
         return mapaWynikow;
     }
 
-    public void setMapaWynikow(HashMap<Kategoria, Liczniki> mapaWynikow) {
-        this.mapaWynikow = mapaWynikow;
+    public void setMapaWynikow(Map<String, Liczniki> mapaWynikow) {
+        this.mapaWynikow = (HashMap<String, Liczniki>)mapaWynikow;
     }
 
     public long getId() {
@@ -87,10 +86,10 @@ public class User {
         this.id = id;
     }
 
-    public HashMap dodajOdpowiedzi(Kategoria kat, int poprawneOdpowiedzi, int zle) {
-        Iterator<Map.Entry<Kategoria, Liczniki>> entries = mapaWynikow.entrySet().iterator();
+    public HashMap dodajOdpowiedzi(String kat, int poprawneOdpowiedzi, int zle) {
+        Iterator<Map.Entry<String, Liczniki>> entries = mapaWynikow.entrySet().iterator();
         while (entries.hasNext()) {
-            Map.Entry<Kategoria, Liczniki> entry = entries.next();
+            Map.Entry<String, Liczniki> entry = entries.next();
             Object key = entry.getKey();
             if (key.equals(kat)) {
                 Object value = entry.getValue().getNiepoprawne();
@@ -105,8 +104,7 @@ public class User {
                 mapaWynikow.put(kat, pair);
             }
         }
-        return mapaWynikow;
+        return (HashMap)mapaWynikow;
     }
 
-    
 }

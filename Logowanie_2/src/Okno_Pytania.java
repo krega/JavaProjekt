@@ -31,7 +31,7 @@ public class Okno_Pytania implements ActionListener {
     private JFrame panelFrame;
     private LinkedList listaPytan;
     private Pytanie pytanie;
-    private Kategoria kategoria;
+    private String kategoria;
     private Losowanie losowanie;
     private User user;
     private List<JButton> listaPrzyciskow = new ArrayList<JButton>();
@@ -39,7 +39,7 @@ public class Okno_Pytania implements ActionListener {
     private ICredentialHandler hndl;
 
 
-    public Okno_Pytania(IPobierzPytanie pytanie, Kategoria kat, User us,ICredentialHandler hand) throws FileNotFoundException, IOException {
+    public Okno_Pytania(IPobierzPytanie pytanie, String kat, User us,ICredentialHandler hand) throws FileNotFoundException, IOException {
         user=us;
         poprawneOdpowiedzi=0;
         zleOdpowiedzi=0;

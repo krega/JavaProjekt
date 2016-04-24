@@ -18,14 +18,14 @@ import java.util.LinkedList;
  */
 public class DostanPytanieZPliku implements IPobierzPytanie{
 
-   private Kategoria kategoria;
+   private String kategoria;
    private LinkedList listaPytan;
    private Pytanie pytanie;
    public DostanPytanieZPliku(){
        listaPytan= new LinkedList();
    pytanie=new Pytanie();
    }
-   public DostanPytanieZPliku(Kategoria kare)
+   public DostanPytanieZPliku(String kare)
    {
        listaPytan=new LinkedList();
        kategoria=kare;
@@ -33,7 +33,7 @@ public class DostanPytanieZPliku implements IPobierzPytanie{
    }
    
 
-  String rozroznijKategorie(Kategoria kate) throws FileNotFoundException
+  String rozroznijKategorie(String kate) throws FileNotFoundException
    {
        String kat=kate.toString();
        String path="C:\\Users\\Kamil\\Documents\\NetBeansProjects\\Logowanie\\Logowanie_2\\Logowanie_2\\Pytania\\";
@@ -58,7 +58,7 @@ public class DostanPytanieZPliku implements IPobierzPytanie{
   
    
    @Override
-  public LinkedList PobierzPytanie(Kategoria kategoria)throws FileNotFoundException{
+  public LinkedList PobierzPytanie(String kategoria)throws FileNotFoundException{
         FileReader fr=null;
         String linia="";
         try{

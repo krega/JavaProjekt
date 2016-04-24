@@ -26,7 +26,7 @@ public class Wybor_Kategorii implements  ActionListener {
     private JButton przyciskSztuka;
     private JButton przyciskLiteratura;
     private JButton przyciskHistoria;
-    private Kategoria kategoria;
+    private String kategoria;
     private User user;
     IPobierzPytanie pytania;
     private ICredentialHandler hndlr;
@@ -101,7 +101,7 @@ public class Wybor_Kategorii implements  ActionListener {
          Object src = e.getSource();
          if(src==przyciskHistoria)
          {
-            Kategoria kategoria=Kategoria.Historia;
+            String kategoria=Kategoria.Historia;
            
             
              try {
@@ -118,7 +118,7 @@ public class Wybor_Kategorii implements  ActionListener {
          }
          if(src==przyciskPolityka)
          {
-             Kategoria kategoria=Kategoria.Polityka;
+             String kategoria=Kategoria.Polityka;
               try {
               //   ustawPytanie.PobierzPytanie(kategoria);
 
@@ -133,7 +133,7 @@ public class Wybor_Kategorii implements  ActionListener {
          }
          if(src==przyciskSport)
          {
-             Kategoria kategoria=Kategoria.Sport;
+                String kategoria=Kategoria.Sport;
              try {
 
                 // ustawPytanie.PobierzPytanie(kategoria);
@@ -149,7 +149,7 @@ public class Wybor_Kategorii implements  ActionListener {
          }
          if(src==przyciskLiteratura)
          {
-             Kategoria kategoria=Kategoria.Literatura;
+             String kategoria=Kategoria.Literatura;
              try {
                 // ustawPytanie.PobierzPytanie(kategoria);
 
@@ -165,7 +165,7 @@ public class Wybor_Kategorii implements  ActionListener {
          }
          if(src==przyciskSztuka)
          {
-             Kategoria kategoria=Kategoria.Sztuka;
+             String  kategoria=Kategoria.Sztuka;
              
               try {
                  //pytania.PobierzPytanie(kategoria);

@@ -48,7 +48,7 @@ public class FileCredentialHandler implements ICredentialHandler {
         StringTokenizer token;
         String l, u, lp1, lp2, lp3, lp4, lp5, lp6, lp7, lp8, lp9, lp10;
 
-        HashMap<Kategoria, Liczniki> mapaWynikow = new HashMap();
+        HashMap<String, Liczniki> mapaWynikow = new HashMap();
         while (odczyt.hasNextLine()) {
 
             token = new StringTokenizer(odczyt.nextLine(), "|");
@@ -84,7 +84,6 @@ public class FileCredentialHandler implements ICredentialHandler {
 
     @Override
     public void zapisNowegoUzytkownika(Credentials Cr1) throws IOException {
-        //new Sprawdz_String(Cr1.getHaslo()).sprawdzString();
         Sprawdz_String ss = new Sprawdz_String(Cr1.getHaslo());
         boolean sprawdz_String = ss.sprawdzString();
         if (sprawdz_String == true) {
@@ -97,26 +96,11 @@ public class FileCredentialHandler implements ICredentialHandler {
             for (int x = 0; x < Cr1.getHaslo().length(); x++) {
                 bw.write(Cr1.getHaslo().charAt(x));
             }
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
-            bw.write("|");
-            bw.write("0");
+            for (int e = 0; e < 10; e++) {
+                bw.write("|");
+                bw.write("0");
+            }
+
             bw.newLine();
             bw.close();
             napisz.close();
@@ -138,10 +122,10 @@ public class FileCredentialHandler implements ICredentialHandler {
             bw.write(value.toString());
             bw.write("|");
 
-            Iterator<Map.Entry<Kategoria, Liczniki>> entries2 = entry.getValue().getMapaWynikow().entrySet().iterator();
+            Iterator<Map.Entry<String, Liczniki>> entries2 = entry.getValue().getMapaWynikow().entrySet().iterator();
 //              Iterator<Map.Entry<Kategoria,Pair>>entries2=entry.getValue().getMapaWynikow().entrySet().iterator();
             while (entries2.hasNext()) {
-                Map.Entry<Kategoria, Liczniki> entry2 = entries2.next();
+                Map.Entry<String, Liczniki> entry2 = entries2.next();
                 Object key2 = entry2.getValue().getPoprawne();
                 Object value2 = entry2.getValue().getNiepoprawne();
                 bw.write(key2.toString());

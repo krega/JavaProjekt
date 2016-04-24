@@ -15,7 +15,7 @@ import java.util.List;
  * @author Kamil
  */
 public interface IPobierzPytanie {
-    LinkedList PobierzPytanie(Kategoria kategoria)throws FileNotFoundException;
+    LinkedList PobierzPytanie(String kategoria)throws FileNotFoundException;
     String[] dzielString(String c);
      
     

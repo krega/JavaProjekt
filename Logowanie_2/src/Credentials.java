@@ -1,4 +1,6 @@
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -12,6 +14,7 @@ import javax.persistence.Id;
  *
  * @author Kamil
  */
+@Embeddable
 public class Credentials {
     private String Login;
     private String Haslo;

@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session; 
 import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 /**
  *
@@ -21,9 +22,15 @@ public class ManageUser {
 public ManageUser()
 {
      try{
-      factory = new Configuration().configure().buildSessionFactory();
+      factory = new AnnotationConfiguration().configure().
+              addAnnotatedClass(User.class).
+              addAnnotatedClass(Liczniki.class).
+              buildSessionFactory();
+                 
+                   
      }catch (Throwable ex) { 
          System.err.println("Failed to create sessionFactory object." + ex);
+
          throw new ExceptionInInitializerError(ex); 
       }
       
