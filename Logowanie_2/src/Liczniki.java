@@ -3,8 +3,10 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -74,8 +76,8 @@ public class Liczniki implements Serializable{
       this.id = id;
    }
    
-   @ManyToOne
-   public User getUser() { return user; }
-   public void setCustomer(User user) { this.user = user; }
-   private User user;
+//   @ManyToOne
+//   public User getUser() { return user; }
+//   public void setCustomer(User user) { this.user = user; }
+//   private User user;
 }

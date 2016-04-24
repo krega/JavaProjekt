@@ -41,7 +41,8 @@ public class User implements Serializable {
     @Column(name = "ID")
     private long id;
     
-    @OneToMany(mappedBy="user", targetEntity = Liczniki.class)
+    @OneToMany
+    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.ALL)
     @MapKey(name="poprawne")
     private Map<String, Liczniki> mapaWynikow;
 
@@ -57,9 +58,11 @@ public class User implements Serializable {
         id = new Long(0);
         credentials = Cr;
         mapaWynikow = new HashMap<String, Liczniki>();
-        mapaWynikow.put(Kategoria.Sztuka, new Liczniki(1, 2));
-        mapaWynikow.put(Kategoria.Historia, new Liczniki(7, 8));
-        mapaWynikow.put(Kategoria.Sport, new Liczniki(2, 4));
+        mapaWynikow.put(Kategoria.Polityka, new Liczniki(-1, -1));
+        mapaWynikow.put(Kategoria.Literatura, new Liczniki(-1, -1));
+        mapaWynikow.put(Kategoria.Sztuka, new Liczniki(-1, -1));
+        mapaWynikow.put(Kategoria.Historia, new Liczniki(-1, -1));
+        mapaWynikow.put(Kategoria.Sport, new Liczniki(-1, -1));
     }
 
     public void setCredentials(Credentials credentials) {
