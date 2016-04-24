@@ -41,7 +41,8 @@ public class User implements Serializable {
     @Column(name = "ID")
     private long id;
     
-    @OneToMany(mappedBy="user", targetEntity = Liczniki.class)
+    @OneToMany
+    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.ALL)
     @MapKey(name="poprawne")
     private Map<String, Liczniki> mapaWynikow;
 
