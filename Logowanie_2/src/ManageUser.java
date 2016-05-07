@@ -72,26 +72,6 @@ public ManageUser()
       }
       return credential;
    }
-  public void listEmployees( ){
-      Session session = factory.openSession();
-      Transaction tx = null;
-      try{
-         tx = session.beginTransaction();
-         List employees = session.createQuery("FROM Employee").list(); 
-         for (Iterator iterator = 
-                           employees.iterator(); iterator.hasNext();){
-           User user = (User) iterator.next(); 
-            System.out.print("First Name: " + user.getCredentials().getLogin()); 
-            System.out.print("  Last Name: " + user.getCredentials().getHaslo()); 
-          
-         }
-         tx.commit();
-      }catch (HibernateException e) {
-         if (tx!=null) tx.rollback();
-         e.printStackTrace(); 
-      }finally {
-         session.close(); 
-      }
-   }
+  
  
 }

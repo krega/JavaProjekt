@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,10 +15,9 @@ import java.util.HashMap;
 public interface ICredentialHandler {
 
     HashMap Odczyt() throws IOException;
-
-    void zapisNowegoUzytkownika(Credentials Cr1) throws IOException;
-    void zapiszWynik() throws IOException;
+    Long zapisNowegoUzytkownika(Credentials Cr1) throws IOException;
+    void zapiszWynik(Long EmployeeID, Map mapa ) throws IOException;
    
    
-
+    
 }

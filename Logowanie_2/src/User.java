@@ -4,19 +4,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
-import javax.persistence.MapKeyEnumerated;
 
 import javax.persistence.OneToMany;
 
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 
 /*
@@ -41,9 +36,9 @@ public class User implements Serializable {
     @Column(name = "ID")
     private long id;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @MapKey(name="poprawne")
+    @MapKeyColumn(name="kategoria")
     private Map<String, Liczniki> mapaWynikow;
 
     private Credentials credentials;
@@ -78,18 +73,21 @@ public class User implements Serializable {
     }
 
     public void setMapaWynikow(Map<String, Liczniki> mapaWynikow) {
-        this.mapaWynikow = (HashMap<String, Liczniki>)mapaWynikow;
+        this.mapaWynikow = mapaWynikow;
     }
 
     public long getId() {
         return id;
     }
 
+    public User() {
+    }
+
     public void setId(long id) {
         this.id = id;
     }
 
-    public HashMap dodajOdpowiedzi(String kat, int poprawneOdpowiedzi, int zle) {
+    public Map dodajOdpowiedzi(String kat, int poprawneOdpowiedzi, int zle) {
         Iterator<Map.Entry<String, Liczniki>> entries = mapaWynikow.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry<String, Liczniki> entry = entries.next();
@@ -107,7 +105,7 @@ public class User implements Serializable {
                 mapaWynikow.put(kat, pair);
             }
         }
-        return (HashMap)mapaWynikow;
+        return mapaWynikow;
     }
 
 }

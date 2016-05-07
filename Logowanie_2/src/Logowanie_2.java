@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -18,7 +19,7 @@ public class Logowanie_2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        try {
 //            factory = new Configuration().configure().buildSessionFactory();
 //        } catch (Throwable ex) {
@@ -26,15 +27,21 @@ public class Logowanie_2 {
 //            throw new ExceptionInInitializerError(ex);
 //        }
 //        ManageUser MU = new ManageUser();
-//        MU.addUser(new Credentials("111","hhhhsasah"));
+  //      MU.addUser(new Credentials("111","hhhhsasah"));
 //        MU.addUser(new Credentials("222","hh"));
 //        
 //        MU.addUser(MU.addCredential("aaa", "bbbb"));
 //        MU.listEmployees();
-         ManageUser MU = new ManageUser();
-         MU.addUser(new Credentials("111","hhhhsasah"));
-        Panel_Logowania Panel = new Panel_Logowania(new FileCredentialHandler());
-
+     //    ManageUser MU = new ManageUser();
+     //    MU.addUser(new Credentials("222","asd"));
+     //  MU.addUser(new Credentials("333","zxccxz"));
+       
+     Credentials Cr=new Credentials("Login","S@1");
+//        DataBaseCredentialHandler dbhndlr=new DataBaseCredentialHandler();
+//       dbhndlr.zapisNowegoUzytkownika(Cr);
+        //dbhndlr.Odczyt();
+         Panel_Logowania Panel = new Panel_Logowania(new DataBaseCredentialHandler());
+//
         // TODO code application logic here
     }
 

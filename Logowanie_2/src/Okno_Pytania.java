@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,15 +36,17 @@ public class Okno_Pytania implements ActionListener {
     private Losowanie losowanie;
     private User user;
     private List<JButton> listaPrzyciskow = new ArrayList<JButton>();
-    private int poprawneOdpowiedzi, zleOdpowiedzi;
     private ICredentialHandler hndl;
+    private int porawnaOdpowiedz, niePoprawnaOdpowiedz;
+    
+    
 
 
     public Okno_Pytania(IPobierzPytanie pytanie, String kat, User us,ICredentialHandler hand) throws FileNotFoundException, IOException {
         user=us;
-        poprawneOdpowiedzi=0;
-        zleOdpowiedzi=0;
-
+        porawnaOdpowiedz=0;
+         niePoprawnaOdpowiedz=0;
+        
         kategoria = kat;
         listaPytan = pytanie.PobierzPytanie(kategoria);
         losowanie = new Losowanie(listaPytan.size());
@@ -82,19 +85,22 @@ public class Okno_Pytania implements ActionListener {
     }
 
    
-    public Pytanie ustawPytanie() throws IOException {
+    public void ustawPytanie() throws IOException {
         int a = losowanie.get();
         if (a == -1) {
             JOptionPane.showMessageDialog(null, "Koniec pytan w tej kategorii");
-            user.setMapaWynikow(user.dodajOdpowiedzi(kategoria, poprawneOdpowiedzi,zleOdpowiedzi));
-            hndl.zapiszWynik();
+          //  user.setMapaWynikow(user.dodajOdpowiedzi(kategoria, poprawneOdpowiedzi,zleOdpowiedzi));
+          //  hndl.zapiszWynik(1,mapa);
+             
             panelFrame.dispose();
-            poprawneOdpowiedzi=0;
-            zleOdpowiedzi=0;
+//             user.dodajOdpowiedzi(kategoria, porawnaOdpowiedz, niePoprawnaOdpowiedz);
+             hndl.zapiszWynik(user.getId(), 
+                     user.dodajOdpowiedzi(
+                             kategoria, porawnaOdpowiedz, niePoprawnaOdpowiedz
+                     ));
+            
         }
         pytanie = (Pytanie) (listaPytan.get(a));
-
-        return pytanie;
 
     }
 
@@ -148,11 +154,11 @@ public class Okno_Pytania implements ActionListener {
             if (odpowiedz_1Button.getText().equals(pytanie.odp1)) {
 
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
-                poprawneOdpowiedzi++;
+                porawnaOdpowiedz++;
                 
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
-                zleOdpowiedzi++;
+                niePoprawnaOdpowiedz++;
             }
             try {
                 ustawPytanie();
@@ -162,18 +168,15 @@ public class Okno_Pytania implements ActionListener {
             } 
            
                 zmianaPytania();
-            
-         
         }
         if (src == odpowiedz_2Button) {
             if (odpowiedz_2Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
 
-                poprawneOdpowiedzi++;
+               porawnaOdpowiedz++;
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
-                      zleOdpowiedzi++;
-         
+                      niePoprawnaOdpowiedz++;         
             }
             try {
                 ustawPytanie();
@@ -190,10 +193,10 @@ public class Okno_Pytania implements ActionListener {
             if (odpowiedz_3Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
 
-               poprawneOdpowiedzi++;
+               porawnaOdpowiedz++;
             } else {
                 JOptionPane.showMessageDialog(null, "NiePoprawna odpowiedz");
-                      zleOdpowiedzi++;
+                         niePoprawnaOdpowiedz++;
          
             }
             try {
@@ -209,11 +212,11 @@ public class Okno_Pytania implements ActionListener {
             if (odpowiedz_4Button.getText().equals(pytanie.odp1)) {
                 JOptionPane.showMessageDialog(null, "Poprawna odpowiedz");
 
-                   poprawneOdpowiedzi++;
+                  porawnaOdpowiedz++;
 
             } else {
                 JOptionPane.showMessageDialog(null, "Niepoprawna odpowiedz");
-                      zleOdpowiedzi++;
+                          niePoprawnaOdpowiedz++;
           
             }
             try {

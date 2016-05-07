@@ -76,8 +76,12 @@ public class Liczniki implements Serializable{
       this.id = id;
    }
    
-//   @ManyToOne
-//   public User getUser() { return user; }
-//   public void setCustomer(User user) { this.user = user; }
-//   private User user;
+   public void dodajPoprwane()
+   {
+       poprawne++;
+   }
+   public void dodajNiepoprawne()
+   {
+      niepoprawne++;
+   }
 }

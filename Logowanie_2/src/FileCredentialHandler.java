@@ -83,7 +83,7 @@ public class FileCredentialHandler implements ICredentialHandler {
     }
 
     @Override
-    public void zapisNowegoUzytkownika(Credentials Cr1) throws IOException {
+    public Long zapisNowegoUzytkownika(Credentials Cr1) throws IOException {
         Sprawdz_String ss = new Sprawdz_String(Cr1.getHaslo());
         boolean sprawdz_String = ss.sprawdzString();
         if (sprawdz_String == true) {
@@ -105,10 +105,11 @@ public class FileCredentialHandler implements ICredentialHandler {
             bw.close();
             napisz.close();
         }
+        return (long)1;
     }
 
     @Override
-    public void zapiszWynik() throws IOException {
+   public void zapiszWynik(Long EmployeeID, Map licznik ) throws IOException {
         File file = new File(sciezka);
         FileWriter napisz = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bw = new BufferedWriter(napisz);
@@ -140,6 +141,7 @@ public class FileCredentialHandler implements ICredentialHandler {
 
         bw.close();
         napisz.close();
-
+       
     }
+  
 }

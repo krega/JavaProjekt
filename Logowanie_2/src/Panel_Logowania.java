@@ -150,8 +150,6 @@ public class Panel_Logowania extends JFrame implements ActionListener {
         Boolean sprawdz = false;
 
         String passString = new String(HasloPasswordField.getPassword());
-//          ICredentialHandler credHnd = new dbCredentialHandler(url);
-
         Iterator<Map.Entry<String, User>> entries = mapa.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry<String, User> entry = entries.next();
@@ -161,7 +159,6 @@ public class Panel_Logowania extends JFrame implements ActionListener {
                 User user = entry.getValue();
                 user.setMapaWynikow(entry.getValue().getMapaWynikow());
                 itsGlowneOkno = new Glowne_Okno(user, itsCredentialHandler);
-
             }
 
         }
