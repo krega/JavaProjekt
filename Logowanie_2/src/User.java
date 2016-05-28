@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapKeyColumn;
 
@@ -14,28 +16,19 @@ import javax.persistence.OneToMany;
 
 
 
-/*
-=======
-import javax.swing.JOptionPane;
 
-    /*
->>>>>>> bb45147f683b1290362db041a0bc49853a92989c
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Kamil
  */
 @javax.persistence.Entity
-public class User implements Serializable {
 
+public class User implements Serializable {
     @Id
-    @GeneratedValue
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ID")
     private long id;
-    
+   
     @OneToMany(fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.ALL)
     @MapKeyColumn(name="kategoria")
@@ -43,8 +36,8 @@ public class User implements Serializable {
 
     private Credentials credentials;
 
-    public User(Credentials Cr, HashMap mapa) {
-        id = new Long(0);
+    public User(Credentials Cr, HashMap<String, Liczniki> mapa) {
+        id = 0L;
         credentials = Cr;
         mapaWynikow = mapa;
     }

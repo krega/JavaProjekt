@@ -1,12 +1,8 @@
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -35,10 +31,11 @@ import org.hibernate.annotations.Cascade;
  */
 
 @javax.persistence.Entity
+
 public class Liczniki implements Serializable{
    
     @Id
-    @GeneratedValue
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private int poprawne;
     private int niepoprawne;

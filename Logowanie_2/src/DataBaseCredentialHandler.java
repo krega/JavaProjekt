@@ -1,7 +1,6 @@
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.HibernateException;
@@ -20,7 +19,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
  *
  * @author Kamil
  */
-public class DataBaseCredentialHandler implements ICredentialHandler {
+public class DataBaseCredentialHandler extends Thread implements ICredentialHandler {
     private static SessionFactory factory; 
     public DataBaseCredentialHandler(){
        
@@ -70,8 +69,10 @@ public class DataBaseCredentialHandler implements ICredentialHandler {
          Session session = factory.openSession();
       Transaction tx = null;
       Long employeeID = null;
+    
       try{
          tx = session.beginTransaction();
+       
          User user = new User(Cr1);
          employeeID = (Long) session.save(user); 
          tx.commit();
@@ -92,11 +93,16 @@ public class DataBaseCredentialHandler implements ICredentialHandler {
      Session session = factory.openSession();
       Transaction tx = null;
       try{
+           
          tx = session.beginTransaction();
+        // session.delete(user.getMapaWynikow());
          User user = session.get(User.class, EmployeeID);
+         
+         
          user.setMapaWynikow(mapa);
-         session.update(user);
+         session.merge(user);
          tx.commit();
+       
     }
       catch (HibernateException e) {
          if (tx!=null) tx.rollback();

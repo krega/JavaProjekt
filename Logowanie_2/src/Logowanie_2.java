@@ -36,9 +36,9 @@ public class Logowanie_2 {
      //    MU.addUser(new Credentials("222","asd"));
      //  MU.addUser(new Credentials("333","zxccxz"));
        
-     Credentials Cr=new Credentials("Login","S@1");
-//        DataBaseCredentialHandler dbhndlr=new DataBaseCredentialHandler();
-//       dbhndlr.zapisNowegoUzytkownika(Cr);
+    // Credentials Cr=new Credentials("krega","W@1");
+     //DataBaseCredentialHandler dbhndlr=new DataBaseCredentialHandler();
+      // dbhndlr.zapisNowegoUzytkownika(Cr);
         //dbhndlr.Odczyt();
          Panel_Logowania Panel = new Panel_Logowania(new DataBaseCredentialHandler());
 //

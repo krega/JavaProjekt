@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,11 +52,32 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     }
 
     private void initHashMapa() {
+        // new Runnable (){
+             
+          //  @Override
+           //public void run() {
+             // for(int i=0;i<10;i++){
+               // System.out.println(i);
+              //}
+    //    try {
+       //     mapa = itsCredentialHandler.Odczyt();
+      //  } catch (IOException ex) {
+       //     Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
+       // }
+//        }
+         //}
+ //           };
+ new Runnable() {
+ 
+    @Override
+    public void run() {
         try {
             mapa = itsCredentialHandler.Odczyt();
         } catch (IOException ex) {
             Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+ }.run();
     }
 
     private void initButtonRejestracja() {
@@ -128,9 +150,18 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     }
 
     public void NewUser(Credentials Cr) throws IOException {
-
-        itsCredentialHandler.zapisNowegoUzytkownika(Cr);
-
+            new Runnable(){
+                @Override
+            public void run(){
+                
+           
+                try {
+                    itsCredentialHandler.zapisNowegoUzytkownika(Cr);
+                } catch (IOException ex) {
+                    Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            }.run();  
     }
 
     private boolean sprawdzLogin() throws HeadlessException {

@@ -94,14 +94,23 @@ public class Okno_Pytania implements ActionListener {
              
             panelFrame.dispose();
 //             user.dodajOdpowiedzi(kategoria, porawnaOdpowiedz, niePoprawnaOdpowiedz);
-             hndl.zapiszWynik(user.getId(), 
-                     user.dodajOdpowiedzi(
-                             kategoria, porawnaOdpowiedz, niePoprawnaOdpowiedz
-                     ));
+ new Runnable(){
+                @Override
+            public void run(){
+                    try {
+                        hndl.zapiszWynik(user.getId(),
+                                user.dodajOdpowiedzi(
+                                        kategoria, porawnaOdpowiedz, niePoprawnaOdpowiedz
+                                ));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Okno_Pytania.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             
         }
+              }.run(); 
         pytanie = (Pytanie) (listaPytan.get(a));
 
+        }
     }
 
     private void initJButtonOdpowiedz_1() {
