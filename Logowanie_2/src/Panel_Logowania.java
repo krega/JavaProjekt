@@ -52,21 +52,7 @@ public class Panel_Logowania extends JFrame implements ActionListener {
     }
 
     private void initHashMapa() {
-        // new Runnable (){
-             
-          //  @Override
-           //public void run() {
-             // for(int i=0;i<10;i++){
-               // System.out.println(i);
-              //}
-    //    try {
-       //     mapa = itsCredentialHandler.Odczyt();
-      //  } catch (IOException ex) {
-       //     Logger.getLogger(Panel_Logowania.class.getName()).log(Level.SEVERE, null, ex);
-       // }
-//        }
-         //}
- //           };
+     
  new Runnable() {
  
     @Override
